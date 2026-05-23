@@ -8,6 +8,8 @@
       "@/*": ["./src/*"]
     },
     "noEmit": true,
+    "declaration": false,
+    "sourceMap": false,
     "types": ["node"]
   },
   "include": [

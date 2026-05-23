@@ -49,3 +49,8 @@ coverage/
 *.local
 tmp/
 .tmp/
+
+# Foundry libs are tracked via git submodules (.gitmodules)
+# packages/contracts/lib/  -- intentionally NOT ignored
+
+# Bun lockfile is committed; bun.lockb (binary) -> bun.lock (text) auto-managed
