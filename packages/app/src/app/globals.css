@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-ink-100 text-ink-900 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  body {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-card shadow-card p-6;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-brand text-white font-medium rounded-full px-5 py-2.5 hover:bg-brand-dark transition;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center bg-white border border-ink-200 text-ink-800 font-medium rounded-full px-5 py-2.5 hover:bg-ink-100 transition;
+  }
+  .pill {
+    @apply inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full;
+  }
+  .pill-for {
+    @apply pill bg-brand-soft text-brand-dark;
+  }
+  .pill-against {
+    @apply pill bg-red-50 text-red-700;
+  }
+  .pill-abstain {
+    @apply pill bg-ink-100 text-ink-700;
+  }
+}
