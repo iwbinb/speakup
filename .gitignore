@@ -42,6 +42,9 @@ Thumbs.db
 coverage/
 *.lcov
 
+# Agent EDGAR document cache (large, regenerated from SEC on demand)
+packages/agent/.cache/
+
 # Vercel
 .vercel
 
