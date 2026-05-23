@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import {
   advise,
+  DEMO_PROPOSALS,
   fetchDef14aFilings,
   fetchDef14aTextCached,
   readProposals,
@@ -63,6 +64,24 @@ export async function GET(req: Request) {
       recommendations: hit.recommendations,
       cached: true,
     });
+  }
+
+  // Demo mode: when no Anthropic key is configured, serve pre-canned
+  // proposals so judges can experience the full flow without provisioning.
+  if (!process.env['ANTHROPIC_API_KEY']) {
+    const demo = DEMO_PROPOSALS[meetingId];
+    if (demo) {
+      return NextResponse.json({
+        proposals: demo.proposals,
+        recommendations: demo.recommendations,
+        cached: false,
+        demo: true,
+      });
+    }
+    return NextResponse.json(
+      { error: 'demo proposals not available for this meeting' },
+      { status: 503 },
+    );
   }
 
   try {

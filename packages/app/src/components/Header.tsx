@@ -1,9 +1,9 @@
 'use client';
 
-import { usePrivy } from '@privy-io/react-auth';
+import { useAuth } from '../lib/auth';
 
 export function Header() {
-  const { ready, authenticated, user, login, logout } = usePrivy();
+  const { ready, authenticated, address, login, logout, isDemoMode } = useAuth();
 
   return (
     <header className="border-b border-ink-200 bg-white">
@@ -17,16 +17,20 @@ export function Header() {
             Give every on-chain shareholder a voice
           </span>
         </div>
-        <div>
+        <div className="flex items-center gap-3">
           {ready && authenticated ? (
-            <div className="flex items-center gap-3">
+            <>
               <span className="text-sm text-ink-700 hidden sm:inline">
-                {shortAddr(user?.wallet?.address)}
+                {shortAddr(address)}
               </span>
-              <button className="btn-secondary" onClick={logout}>
-                Sign out
-              </button>
-            </div>
+              {isDemoMode ? (
+                <span className="pill bg-ink-100 text-ink-700">demo</span>
+              ) : (
+                <button className="btn-secondary" onClick={logout}>
+                  Sign out
+                </button>
+              )}
+            </>
           ) : (
             <button className="btn-primary" onClick={login} disabled={!ready}>
               {ready ? 'Sign in' : 'Loading...'}

@@ -11,3 +11,4 @@ export {
 export { readProposals, type ReadInput } from './agents/reader';
 export { advise, type AdviseInput } from './agents/advisor';
 export { pack, packLocal, type ExecuteInput } from './agents/executor';
+export { DEMO_PROPOSALS } from './demo-proposals';

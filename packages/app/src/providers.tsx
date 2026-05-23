@@ -1,34 +1,31 @@
 'use client';
 
 import { PrivyProvider } from '@privy-io/react-auth';
-import { WagmiProvider } from '@privy-io/wagmi';
+import { WagmiProvider as PrivyWagmiProvider } from '@privy-io/wagmi';
+import { WagmiProvider as PlainWagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 
 import { wagmiConfig } from './lib/wagmi';
 import { robinhoodTestnet } from './lib/chains';
+import { DemoAuthProvider, RealAuthProvider, isDemoMode } from './lib/auth';
 
 const PRIVY_APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? '';
 
 export function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
 
-  if (!PRIVY_APP_ID) {
+  if (isDemoMode) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-8 text-center">
-        <div className="card max-w-lg">
-          <h2 className="text-xl font-semibold mb-2">SpeakUp setup needed</h2>
-          <p className="text-ink-700 text-sm">
-            Set <code className="bg-ink-100 px-1.5 py-0.5 rounded">NEXT_PUBLIC_PRIVY_APP_ID</code>{' '}
-            in <code>.env</code> to enable wallet login. See
-            <a className="underline ml-1" href="https://dashboard.privy.io">
-              dashboard.privy.io
-            </a>
-            .
-          </p>
-        </div>
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <PlainWagmiProvider config={wagmiConfig}>
+          <DemoAuthProvider>
+            <DemoBanner />
+            {children}
+          </DemoAuthProvider>
+        </PlainWagmiProvider>
+      </QueryClientProvider>
     );
   }
 
@@ -51,8 +48,22 @@ export function Providers({ children }: { children: ReactNode }) {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>
+        <PrivyWagmiProvider config={wagmiConfig}>
+          <RealAuthProvider>{children}</RealAuthProvider>
+        </PrivyWagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
+  );
+}
+
+function DemoBanner() {
+  return (
+    <div className="bg-ink-900 text-white text-xs px-4 py-2 text-center">
+      Demo mode · read-only preview with a mock wallet. Set
+      <code className="mx-1.5 px-1.5 py-0.5 bg-ink-800 rounded">
+        NEXT_PUBLIC_PRIVY_APP_ID
+      </code>
+      in <code>.env.local</code> to enable real login + on-chain signing.
+    </div>
   );
 }

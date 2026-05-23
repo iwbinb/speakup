@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'SpeakUp — Give every on-chain shareholder a voice',
+  title: 'SpeakUp · Give every on-chain shareholder a voice',
   description:
     'AI Copilot for on-chain shareholder governance. Read 100-page proxy statements in three lines, vote in one click, record on-chain.',
 };

@@ -1,12 +1,11 @@
 'use client';
 
-import { usePrivy } from '@privy-io/react-auth';
-
 import { Header } from '../components/Header';
 import { HoldingsList } from '../components/HoldingsList';
+import { useAuth } from '../lib/auth';
 
 export default function HomePage() {
-  const { ready, authenticated } = usePrivy();
+  const { ready, authenticated } = useAuth();
 
   return (
     <>

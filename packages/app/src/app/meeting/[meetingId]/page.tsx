@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { use, useEffect, useState } from 'react';
-import { usePrivy } from '@privy-io/react-auth';
 import { useWriteContract } from 'wagmi';
 import { keccak256, toBytes } from 'viem';
 
 import { Header } from '../../../components/Header';
 import { ProposalCard } from '../../../components/ProposalCard';
 import { useMeetings } from '../../../hooks/useMeetings';
+import { useAuth } from '../../../lib/auth';
 import { DEFAULT_CHAIN_ID } from '../../../lib/chains';
 import { CHOICE_LABEL, REGISTRY_ABI, REGISTRY_ADDRESS, choiceToIdx } from '../../../lib/registry';
 import type { Choice, ProposalList, RecommendationList } from '@speakup/agent';
@@ -18,7 +18,7 @@ type Decisions = Record<number, Choice>;
 export default function MeetingPage({ params }: { params: Promise<{ meetingId: string }> }) {
   const { meetingId } = use(params);
   const meeting = useMeetings().find((m) => m.id === meetingId);
-  const { ready, authenticated } = usePrivy();
+  const { ready, authenticated, isDemoMode } = useAuth();
   const [proposals, setProposals] = useState<ProposalList | null>(null);
   const [recs, setRecs] = useState<RecommendationList | null>(null);
   const [decisions, setDecisions] = useState<Decisions>({});
@@ -77,6 +77,12 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
 
   async function submit() {
     if (!proposals) return;
+    if (isDemoMode) {
+      setError(
+        'Demo mode — on-chain signing is disabled. Set NEXT_PUBLIC_PRIVY_APP_ID and fund the deployer to enable real votes.',
+      );
+      return;
+    }
     const registryAddr = REGISTRY_ADDRESS[DEFAULT_CHAIN_ID];
     if (!registryAddr || registryAddr === '0x0000000000000000000000000000000000000000') {
       setError('Registry not deployed on this chain yet.');

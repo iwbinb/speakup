@@ -21,6 +21,7 @@ export const robinhoodTestnet = defineChain({
 export const supportedChains = [robinhoodTestnet, arbitrumSepolia] as const;
 export type SupportedChainId = (typeof supportedChains)[number]['id'];
 
-export const DEFAULT_CHAIN_ID: SupportedChainId =
-  (Number(process.env['NEXT_PUBLIC_DEFAULT_CHAIN_ID']) as SupportedChainId) ??
-  robinhoodTestnet.id;
+const envChainId = process.env['NEXT_PUBLIC_DEFAULT_CHAIN_ID'];
+export const DEFAULT_CHAIN_ID: SupportedChainId = envChainId
+  ? (Number(envChainId) as SupportedChainId)
+  : robinhoodTestnet.id;

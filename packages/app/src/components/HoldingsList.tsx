@@ -1,15 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { usePrivy } from '@privy-io/react-auth';
 
 import { useHoldings } from '../hooks/useHoldings';
 import { useMeetings } from '../hooks/useMeetings';
+import { useAuth } from '../lib/auth';
 
 export function HoldingsList() {
-  const { user } = usePrivy();
-  const account = user?.wallet?.address as `0x${string}` | undefined;
-  const { holdings, isLoading, error } = useHoldings(account);
+  const { address, isDemoMode } = useAuth();
+  const { holdings, isLoading, error } = useHoldings(address);
   const allMeetings = useMeetings();
 
   if (error) {
@@ -21,7 +20,7 @@ export function HoldingsList() {
     );
   }
 
-  if (isLoading || !account) {
+  if (isLoading || !address) {
     return <div className="card text-ink-500">Detecting your holdings…</div>;
   }
 
@@ -41,7 +40,7 @@ export function HoldingsList() {
         </p>
       </div>
 
-      {!anyBalance && (
+      {!anyBalance && !isDemoMode && (
         <div className="card border-l-4 border-brand">
           <p className="font-medium">No stock tokens detected.</p>
           <p className="text-sm text-ink-700 mt-1">
