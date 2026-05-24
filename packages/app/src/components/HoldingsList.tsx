@@ -6,6 +6,7 @@ import { useHoldings } from '../hooks/useHoldings';
 import { useMeetings } from '../hooks/useMeetings';
 import { useAuth } from '../lib/auth';
 import { useActiveChain } from '../lib/chain-context';
+import { Spinner } from './Spinner';
 import { TickerLogo } from './TickerLogo';
 
 export function HoldingsList() {

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
 import { Providers } from '../providers';
+import { Footer } from '../components/Footer';
 import './globals.css';
 
 const inter = Inter({
@@ -29,8 +30,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans">
-        <Providers>{children}</Providers>
+      <body className="font-sans flex flex-col min-h-screen">
+        <Providers>
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
