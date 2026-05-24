@@ -115,3 +115,98 @@ forge create test/mocks/MockERC20.sol:MockERC20 \
 
 # Then mint, registerTicker, registerMeeting, castVote per the tx trace above
 ```
+
+---
+
+## Appendix: Production-script dry-run (B1 + B2 + B3 + B4, 2026-05-24)
+
+Re-ran the same flow above using only the production `bun run` scripts (no
+inline `cast` orchestration) to verify the deploy / bootstrap / relayer
+scripts work end-to-end. Anvil 31337 stands in for the real testnet RPC.
+
+### B1: `bun run deploy:robinhood`
+
+```
+ROBINHOOD_RPC_URL=http://127.0.0.1:8545 \
+DEPLOYER_PRIVATE_KEY=0xac09…ff80 \
+  bun run deploy:robinhood
+```
+
+Result: **Registry deployed at `0x5FbDB2315678afecb367f032d93F642f64180aa3`**.
+Sourcify verify step expectedly fails on chain 31337 (anvil unsupported);
+on real Robinhood Chain testnet (id 46630) the configured `blockscout`
+verifier is used per `foundry.toml`.
+
+### B2: `bun run deploy:sepolia` simulate against real Arbitrum Sepolia
+
+```
+ARBITRUM_SEPOLIA_RPC_URL=https://sepolia-rollup.arbitrum.io/rpc \
+DEPLOYER_PRIVATE_KEY=0xac09…ff80 \
+  forge script script/Deploy.s.sol --root packages/contracts \
+  --rpc-url arbitrum_sepolia
+```
+
+Result: **`SIMULATION COMPLETE`** on chain 421614. Gas estimate
+0.000089116442227911 ETH (~$0.20). Blocked from broadcast only on
+deployer funding. Same script + same chain config.
+
+### B3: `bun run bootstrap:robinhood`
+
+```
+REGISTRY=0x5FbDB…0aa3 \
+MOCK_TSLA=0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 \
+MOCK_AMZN=0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9 \
+MOCK_NFLX=0x5FC8d32690cc91D4c39d9d3abcBD16989F875707 \
+  bun run bootstrap:robinhood
+```
+
+Result: **`ONCHAIN EXECUTION COMPLETE & SUCCESSFUL`**. Three tickers
+(TSLA / AMZN / NFLX) and three 30-day meetings registered in a single
+`forge script` execution.
+
+### B4: `bun run relayer:robinhood` + cast a vote
+
+```
+ROBINHOOD_RPC_URL=http://127.0.0.1:8545 \
+ROBINHOOD_CHAIN_ID=31337 \
+REGISTRY=0x5FbDB…0aa3 \
+RELAYER_PRIVATE_KEY=0xac09…ff80 \
+ACK_DELAY_SECONDS=2 \
+  bun run packages/agent/scripts/mock-relayer.ts &
+```
+
+Voter casts AGAINST on TSLA item 2:
+
+| Block | Tx | Event |
+|---|---|---|
+| 11 | `0xa495047707347c615ec76059bd0ce29eb3453ccc24098c52795329ea8e2cf703` | voter castVote → `VoteCast uid=0x674d2807…009f1286` |
+| 12 | `0x911d09b2b508a53ba6a97b5c002dd9d5e78b7ab824ca56bf0c19957ab0c94fda` | relayer acknowledge → `VoteAcknowledged ref=BROADRIDGE-MOCK-1779597412143-2` |
+
+Relayer log:
+
+```
+SpeakUp mock relayer started
+  Registry: 0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Relayer:  0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+  Chain:    31337
+  Delay:    2s before each ack
+→ VoteCast uid=0x674d2807… voter=0x70997970… item=2
+  ack uid=0x674d2807…  tx=0x911d09b2…ab0c94fda  ref=BROADRIDGE-MOCK-1779597412143-2
+```
+
+Final state:
+
+```
+getVoterUids(voter)          = [0x674d2807…009f1286]
+hasVoted(voter, TSLA-MOC, 2) = true
+```
+
+### A1 status
+
+The Robinhood Chain testnet faucet (`faucet.testnet.chain.robinhood.com`,
+`faucet.quicknode.com/robinhood/testnet`, `faucets.chain.link/robinhood-testnet`)
+all sit behind a Vercel-managed bot challenge. Three programmatic attempts
+returned the challenge HTML rather than a drip. The faucet must be triggered
+manually by the user with browser captcha resolution; once the deployer at
+`0x14d0b2566bdE08B31FE4AED26fB5D4d209741351` has ETH, the four scripts above
+will run against the real RPC unchanged (only `ROBINHOOD_RPC_URL` differs).
