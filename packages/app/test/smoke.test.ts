@@ -29,7 +29,7 @@ describe('SpeakUp smoke', () => {
     expect(status).toBe(200);
     expect(body).toContain('SpeakUp');
     expect(body).toContain('Your demo holdings');
-    expect(body).toContain('Robinhood Chain testnet');
+    expect(body).toContain('Robinhood Chain Testnet');
     expect(body).toContain('Tesla');
     expect(body).toContain('Amazon');
     expect(body).toContain('Netflix');
@@ -38,9 +38,10 @@ describe('SpeakUp smoke', () => {
   test('GET / advertises proposal counts that match DEMO_PROPOSALS', async () => {
     const { body } = await fetchText('/');
     // React inserts <!-- --> between dynamic number and text node; use regex.
-    expect(body).toMatch(/7[^<>]*<[^>]*>[^>]*>?\s*proposals to review/);
-    expect(body).toMatch(/8[^<>]*<[^>]*>[^>]*>?\s*proposals to review/);
-    expect(body).toMatch(/5[^<>]*<[^>]*>[^>]*>?\s*proposals to review/);
+    // Button text is "{N} proposals" with an arrow icon.
+    expect(body).toMatch(/>7[^<>]*<[^>]*>[^>]*>?\s*proposals/);
+    expect(body).toMatch(/>8[^<>]*<[^>]*>[^>]*>?\s*proposals/);
+    expect(body).toMatch(/>5[^<>]*<[^>]*>[^>]*>?\s*proposals/);
   });
 
   test('GET /about renders project explainer', async () => {

@@ -46,7 +46,7 @@ contract SpeakUpRegistry {
         string ackRef;
     }
 
-    address public owner;
+    address public immutable owner;
     address public relayer;
 
     mapping(bytes32 ticker => TickerInfo) public tickers;
@@ -169,43 +169,12 @@ contract SpeakUpRegistry {
         external
         returns (bytes32 uid)
     {
-        Meeting storage m = meetings[meetingId];
-        if (m.ticker == bytes32(0)) revert MeetingNotFound();
-        if (!m.active) revert MeetingClosedAlready();
-        // Voting windows are measured in days; the ~15s validator timestamp
-        // drift is irrelevant for this comparison.
-        // forge-lint: disable-next-line(block-timestamp)
-        if (block.timestamp < m.voteOpen || block.timestamp > m.voteDeadline) {
-            revert MeetingNotOpen();
-        }
-        if (_existingVote[msg.sender][meetingId][itemId] != bytes32(0)) revert AlreadyVoted();
-
-        TickerInfo storage t = tickers[m.ticker];
-        uint256 weight = IERC20(t.token).balanceOf(msg.sender);
-        if (weight == 0) revert NoVotingWeight();
-
-        uid = keccak256(
-            abi.encode(msg.sender, meetingId, itemId, block.chainid, address(this))
-        );
-        attestations[uid] = VoteAttestation({
-            voter: msg.sender,
-            meetingId: meetingId,
-            itemId: itemId,
-            choice: choice,
-            weight: weight,
-            reasoningHash: reasoningHash,
-            timestamp: uint64(block.timestamp),
-            status: AckStatus.PENDING,
-            ackRef: ""
-        });
-        _voterUids[msg.sender].push(uid);
-        _meetingUids[meetingId].push(uid);
-        _existingVote[msg.sender][meetingId][itemId] = uid;
-
-        emit VoteCast(uid, msg.sender, meetingId, itemId, choice, weight);
+        uid = _castVote(msg.sender, meetingId, itemId, choice, reasoningHash);
     }
 
     /// @notice Batch wrapper for casting multiple item votes in a single tx.
+    /// Calls the internal helper directly so we avoid N external CALL opcodes
+    /// (vs the naive `this.castVote(...)` loop slither flagged as calls-in-loop).
     function castVotes(
         bytes32 meetingId,
         uint16[] calldata itemIds,
@@ -216,8 +185,56 @@ contract SpeakUpRegistry {
         require(n == choices.length && n == reasoningHashes.length, "length mismatch");
         uids = new bytes32[](n);
         for (uint256 i; i < n; ++i) {
-            uids[i] = this.castVote(meetingId, itemIds[i], choices[i], reasoningHashes[i]);
+            uids[i] =
+                _castVote(msg.sender, meetingId, itemIds[i], choices[i], reasoningHashes[i]);
         }
+    }
+
+    function _castVote(
+        address voter,
+        bytes32 meetingId,
+        uint16 itemId,
+        Choice choice,
+        bytes32 reasoningHash
+    ) internal returns (bytes32 uid) {
+        Meeting storage m = meetings[meetingId];
+        if (m.ticker == bytes32(0)) revert MeetingNotFound();
+        if (!m.active) revert MeetingClosedAlready();
+        // Voting windows are measured in days; the ~15s validator timestamp
+        // drift is irrelevant for this comparison.
+        // forge-lint: disable-next-line(block-timestamp)
+        // slither-disable-next-line timestamp
+        if (block.timestamp < m.voteOpen || block.timestamp > m.voteDeadline) {
+            revert MeetingNotOpen();
+        }
+        if (_existingVote[voter][meetingId][itemId] != bytes32(0)) revert AlreadyVoted();
+
+        TickerInfo storage t = tickers[m.ticker];
+        uint256 weight = IERC20(t.token).balanceOf(voter);
+        // weight is a uint256 from balanceOf; comparing to literal 0 is the
+        // canonical check and not a dangerous strict-equality.
+        // slither-disable-next-line incorrect-equality
+        if (weight == 0) revert NoVotingWeight();
+
+        uid = keccak256(
+            abi.encode(voter, meetingId, itemId, block.chainid, address(this))
+        );
+        attestations[uid] = VoteAttestation({
+            voter: voter,
+            meetingId: meetingId,
+            itemId: itemId,
+            choice: choice,
+            weight: weight,
+            reasoningHash: reasoningHash,
+            timestamp: uint64(block.timestamp),
+            status: AckStatus.PENDING,
+            ackRef: ""
+        });
+        _voterUids[voter].push(uid);
+        _meetingUids[meetingId].push(uid);
+        _existingVote[voter][meetingId][itemId] = uid;
+
+        emit VoteCast(uid, voter, meetingId, itemId, choice, weight);
     }
 
     // ============ Relayer acknowledgement ============

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAuth, type AuthMode } from '../lib/auth';
 import { useActiveChain } from '../lib/chain-context';
 import type { SupportedChainId } from '../lib/chains';
+import { resolveEns, looksLikeEns } from '../lib/ens';
 import { ConnectWalletModal } from './ConnectWalletModal';
 import { LogoMark } from './Logo';
 
@@ -168,6 +169,27 @@ function IdentitySwitcher({
 }) {
   const auth = useAuth();
   const [watchInput, setWatchInput] = useState<string>(auth.watchAddress ?? '');
+  const [resolving, setResolving] = useState(false);
+  const [resolveError, setResolveError] = useState<string | null>(null);
+
+  async function commitWatch() {
+    setResolveError(null);
+    const raw = watchInput.trim();
+    if (looksLikeEns(raw)) {
+      setResolving(true);
+      const addr = await resolveEns(raw);
+      setResolving(false);
+      if (!addr) {
+        setResolveError(`No address record for ${raw}`);
+        return;
+      }
+      auth.setWatchAddress(addr);
+      onClose();
+      return;
+    }
+    auth.setWatchAddress(raw);
+    onClose();
+  }
 
   // Esc to close
   useEffect(() => {
@@ -220,7 +242,7 @@ function IdentitySwitcher({
               </span>
             </div>
             <p className="text-xs text-ink-500 mb-2">
-              Paste any 0x address to view its holdings and meeting agenda.
+              Paste any 0x address or ENS name (e.g. <code>vitalik.eth</code>).
             </p>
             <div className="flex gap-2">
               <input
@@ -228,28 +250,30 @@ function IdentitySwitcher({
                 inputMode="text"
                 spellCheck={false}
                 autoComplete="off"
-                placeholder="0x…"
+                placeholder="0x… or vitalik.eth"
                 value={watchInput}
-                onChange={(e) => setWatchInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    auth.setWatchAddress(watchInput);
-                    onClose();
-                  }
+                onChange={(e) => {
+                  setWatchInput(e.target.value);
+                  setResolveError(null);
                 }}
-                className="flex-1 min-w-0 px-2 py-1.5 text-sm font-mono border border-ink-200 rounded focus:outline-none focus:border-brand"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') commitWatch();
+                }}
+                disabled={resolving}
+                className="flex-1 min-w-0 px-2 py-1.5 text-sm font-mono border border-ink-200 rounded focus:outline-none focus:border-brand disabled:opacity-60"
               />
               <button
                 type="button"
                 className="btn-secondary text-sm"
-                onClick={() => {
-                  auth.setWatchAddress(watchInput);
-                  onClose();
-                }}
+                onClick={commitWatch}
+                disabled={resolving}
               >
-                Watch
+                {resolving ? 'Resolving…' : 'Watch'}
               </button>
             </div>
+            {resolveError && (
+              <p className="text-xs text-red-600 mt-2">{resolveError}</p>
+            )}
           </div>
 
           <IdentityOption

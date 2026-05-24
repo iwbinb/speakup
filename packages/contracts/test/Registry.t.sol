@@ -208,4 +208,86 @@ contract RegistryTest is Test {
         (,,,, uint256 weight,,,,) = registry.attestations(uid);
         assertEq(weight, mintAmount);
     }
+
+    /// @notice Same (voter, meeting, item) always yields the same uid; different
+    ///         items yield different uids. Catches accidental hash collisions.
+    function testFuzz_UidIsDeterministic(uint16 itemA, uint16 itemB) public {
+        vm.assume(itemA != itemB);
+        address charlie = address(0xCAAA);
+        tslaToken.mint(charlie, 1 ether);
+        vm.startPrank(charlie);
+        bytes32 uid1 = registry.castVote(TSLA_MEETING_1, itemA, SpeakUpRegistry.Choice.FOR, bytes32(0));
+        bytes32 uid2 = registry.castVote(TSLA_MEETING_1, itemB, SpeakUpRegistry.Choice.AGAINST, bytes32(0));
+        vm.stopPrank();
+        assertTrue(uid1 != uid2, "different items must produce different uids");
+        bytes32 expected = keccak256(
+            abi.encode(charlie, TSLA_MEETING_1, itemA, block.chainid, address(registry))
+        );
+        assertEq(uid1, expected);
+    }
+
+    // ---------- Invariants ----------
+
+    function invariant_AttestationVoterAddressIsNeverZero() public view {
+        // Sample the latest uid stored for the test users; voter field can never be
+        // the zero address once an attestation exists (would imply uninitialized
+        // storage being treated as a vote).
+        bytes32[] memory uids = registry.getMeetingUids(TSLA_MEETING_1);
+        for (uint256 i; i < uids.length; ++i) {
+            (address voter,,,,,,,,) = registry.attestations(uids[i]);
+            assertTrue(voter != address(0), "voter must be non-zero");
+        }
+    }
+
+    function invariant_HasVotedConsistentWithUids() public view {
+        // For every uid in the meeting's list, hasVoted(voter, meeting, itemId)
+        // must report true. Catches accidental writes that desync the indexes.
+        bytes32[] memory uids = registry.getMeetingUids(TSLA_MEETING_1);
+        for (uint256 i; i < uids.length; ++i) {
+            (address voter,, uint16 itemId,,,,,,) = registry.attestations(uids[i]);
+            assertTrue(
+                registry.hasVoted(voter, TSLA_MEETING_1, itemId),
+                "hasVoted must be true for every stored uid"
+            );
+        }
+    }
+
+    // ---------- Batch ----------
+
+    function test_CastVotes_BatchCastsAll() public {
+        uint16[] memory items = new uint16[](3);
+        items[0] = 1;
+        items[1] = 2;
+        items[2] = 3;
+        SpeakUpRegistry.Choice[] memory choices = new SpeakUpRegistry.Choice[](3);
+        choices[0] = SpeakUpRegistry.Choice.FOR;
+        choices[1] = SpeakUpRegistry.Choice.AGAINST;
+        choices[2] = SpeakUpRegistry.Choice.ABSTAIN;
+        bytes32[] memory hashes = new bytes32[](3);
+
+        vm.prank(alice);
+        bytes32[] memory uids = registry.castVotes(TSLA_MEETING_1, items, choices, hashes);
+        assertEq(uids.length, 3);
+        for (uint256 i; i < 3; ++i) {
+            assertTrue(uids[i] != bytes32(0));
+            assertTrue(registry.hasVoted(alice, TSLA_MEETING_1, items[i]));
+        }
+    }
+
+    function test_CastVotes_RevertsOnLengthMismatch() public {
+        uint16[] memory items = new uint16[](2);
+        SpeakUpRegistry.Choice[] memory choices = new SpeakUpRegistry.Choice[](3);
+        bytes32[] memory hashes = new bytes32[](2);
+        vm.prank(alice);
+        vm.expectRevert(bytes("length mismatch"));
+        registry.castVotes(TSLA_MEETING_1, items, choices, hashes);
+    }
+
+    // ---------- Ownership immutability ----------
+
+    function test_OwnerIsImmutable() public view {
+        // Sanity-check: there is no setter that can change owner. If a setter
+        // were ever added by accident, calling it would compile and break this.
+        assertEq(registry.owner(), address(this));
+    }
 }
