@@ -6,14 +6,7 @@ import { useHoldings } from '../hooks/useHoldings';
 import { useMeetings } from '../hooks/useMeetings';
 import { useAuth } from '../lib/auth';
 import { useActiveChain } from '../lib/chain-context';
-
-const TICKER_TINT: Record<string, { bg: string; fg: string }> = {
-  TSLA: { bg: 'bg-red-50', fg: 'text-red-700' },
-  AMZN: { bg: 'bg-amber-50', fg: 'text-amber-700' },
-  NFLX: { bg: 'bg-red-50', fg: 'text-red-700' },
-  PLTR: { bg: 'bg-violet-50', fg: 'text-violet-700' },
-  AMD: { bg: 'bg-emerald-50', fg: 'text-emerald-700' },
-};
+import { TickerLogo } from './TickerLogo';
 
 export function HoldingsList() {
   const { address, mode } = useAuth();
@@ -98,10 +91,6 @@ export function HoldingsList() {
 
       <ul className="space-y-3">
         {withMeetings.map((h, idx) => {
-          const tint = TICKER_TINT[h.symbol] ?? {
-            bg: 'bg-ink-100',
-            fg: 'text-ink-700',
-          };
           const hasMeeting = h.meetings.length > 0;
           return (
             <li
@@ -110,11 +99,7 @@ export function HoldingsList() {
               style={{ animationDelay: `${idx * 60}ms` }}
             >
               <div className="flex items-center gap-4 min-w-0">
-                <div
-                  className={`w-12 h-12 rounded-2xl ${tint.bg} ${tint.fg} flex items-center justify-center font-bold text-lg shrink-0`}
-                >
-                  {h.symbol[0]}
-                </div>
+                <TickerLogo symbol={h.symbol} size={48} />
                 <div className="min-w-0">
                   <div className="flex items-baseline gap-2">
                     <p className="font-semibold text-lg">{h.name}</p>
