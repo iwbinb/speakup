@@ -7,7 +7,7 @@ import { useMeetings } from '../hooks/useMeetings';
 import { useAuth } from '../lib/auth';
 
 export function HoldingsList() {
-  const { address, isDemoMode } = useAuth();
+  const { address, mode } = useAuth();
   const { holdings, isLoading, error } = useHoldings(address);
   const allMeetings = useMeetings();
 
@@ -29,31 +29,41 @@ export function HoldingsList() {
     meetings: allMeetings.filter((m) => m.ticker === h.symbol),
   }));
   const anyBalance = withMeetings.some((h) => h.balance > 0n);
+  const heading =
+    mode === 'demo'
+      ? 'Your demo holdings'
+      : mode === 'watch'
+        ? 'Watching holdings'
+        : 'Your holdings';
 
   return (
     <div className="space-y-6">
       <div className="flex items-baseline justify-between">
-        <h2 className="text-2xl font-bold">Your holdings</h2>
+        <h2 className="text-2xl font-bold">{heading}</h2>
         <p className="text-sm text-ink-500">
           Robinhood Chain testnet · {withMeetings.length} ticker
           {withMeetings.length === 1 ? '' : 's'} tracked
         </p>
       </div>
 
-      {!anyBalance && !isDemoMode && (
+      {!anyBalance && mode !== 'demo' && (
         <div className="card border-l-4 border-brand">
-          <p className="font-medium">No stock tokens detected.</p>
+          <p className="font-medium">No stock tokens detected for this address.</p>
           <p className="text-sm text-ink-700 mt-1">
-            Visit{' '}
-            <a
-              href="https://faucet.testnet.chain.robinhood.com"
-              target="_blank"
-              rel="noreferrer"
-              className="underline text-brand-dark"
-            >
-              faucet.testnet.chain.robinhood.com
-            </a>{' '}
-            to get 5 of each Stock Token on Robinhood Chain testnet, then refresh.
+            {mode === 'watch'
+              ? 'The address you are watching holds 0 of TSLA, AMZN, NFLX on Robinhood Chain testnet. Switch to a different address or have its owner claim from the faucet.'
+              : 'Claim Stock Tokens at '}
+            {mode === 'wallet' && (
+              <a
+                href="https://faucet.testnet.chain.robinhood.com"
+                target="_blank"
+                rel="noreferrer"
+                className="underline text-brand-dark"
+              >
+                faucet.testnet.chain.robinhood.com
+              </a>
+            )}
+            {mode === 'wallet' && ', then refresh.'}
           </p>
         </div>
       )}

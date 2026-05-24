@@ -7,7 +7,7 @@ import type { Address } from 'viem';
 import { DEFAULT_CHAIN_ID } from '../lib/chains';
 import { ERC20_ABI } from '../lib/erc20';
 import { TICKERS } from '../lib/tickers';
-import { isDemoMode } from '../lib/auth';
+import { useAuth } from '../lib/auth';
 
 export type Holding = {
   symbol: string;
@@ -26,6 +26,9 @@ const DEMO_BALANCES: Record<string, string> = {
 };
 
 export function useHoldings(account: Address | undefined) {
+  const { mode } = useAuth();
+  const isDemoIdentity = mode === 'demo';
+
   const calls = TICKERS.flatMap((t) => {
     const addr = t.addresses[DEFAULT_CHAIN_ID];
     if (!addr) return [];
@@ -42,11 +45,14 @@ export function useHoldings(account: Address | undefined) {
 
   const { data, isLoading, error, refetch } = useReadContracts({
     contracts: calls,
-    query: { enabled: !!account && !isDemoMode },
+    query: { enabled: !!account && !isDemoIdentity },
   });
 
   const holdings: Holding[] = [];
-  if (isDemoMode && account) {
+
+  // Demo identity: synthetic balances so judges see proposals without
+  // claiming faucet tokens. Watch + wallet modes always hit the RPC.
+  if (isDemoIdentity && account) {
     for (const t of TICKERS) {
       const addr = t.addresses[DEFAULT_CHAIN_ID];
       if (!addr) continue;

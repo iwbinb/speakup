@@ -18,7 +18,7 @@ type Decisions = Record<number, Choice>;
 export default function MeetingPage({ params }: { params: Promise<{ meetingId: string }> }) {
   const { meetingId } = use(params);
   const meeting = useMeetings().find((m) => m.id === meetingId);
-  const { ready, authenticated, isDemoMode } = useAuth();
+  const { ready, authenticated, canSign, mode } = useAuth();
   const [proposals, setProposals] = useState<ProposalList | null>(null);
   const [recs, setRecs] = useState<RecommendationList | null>(null);
   const [decisions, setDecisions] = useState<Decisions>({});
@@ -77,9 +77,13 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
 
   async function submit() {
     if (!proposals) return;
-    if (isDemoMode) {
+    if (!canSign) {
       setError(
-        'Demo mode — on-chain signing is disabled. Set NEXT_PUBLIC_PRIVY_APP_ID and fund the deployer to enable real votes.',
+        mode === 'demo'
+          ? 'Demo identity is read-only. Switch to "Connect browser wallet" in the header to cast real votes.'
+          : mode === 'watch'
+            ? 'You are watching this address read-only. Connect a wallet you control to cast votes.'
+            : 'Wallet not ready. Reconnect and try again.',
       );
       return;
     }
