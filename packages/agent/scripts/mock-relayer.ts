@@ -64,10 +64,16 @@ console.log(`  Delay:    ${ACK_DELAY_MS / 1000}s before each ack`);
 
 const pending = new Set<string>();
 
+// Force HTTP polling: many testnet RPCs (incl. public Robinhood Chain
+// rpc.testnet.chain.robinhood.com) do not expose eth_newFilter or WebSocket
+// subscriptions, so viem's default block-filter watcher silently misses
+// events. Polling getLogs every 2s is reliable on every JSON-RPC node.
 publicClient.watchContractEvent({
   address: REGISTRY,
   abi: ABI,
   eventName: 'VoteCast',
+  poll: true,
+  pollingInterval: 2000,
   onLogs: (logs) => {
     for (const log of logs) {
       const uid = log.args.uid;

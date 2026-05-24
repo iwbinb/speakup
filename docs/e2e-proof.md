@@ -207,6 +207,72 @@ The Robinhood Chain testnet faucet (`faucet.testnet.chain.robinhood.com`,
 `faucet.quicknode.com/robinhood/testnet`, `faucets.chain.link/robinhood-testnet`)
 all sit behind a Vercel-managed bot challenge. Three programmatic attempts
 returned the challenge HTML rather than a drip. The faucet must be triggered
-manually by the user with browser captcha resolution; once the deployer at
-`0x14d0b2566bdE08B31FE4AED26fB5D4d209741351` has ETH, the four scripts above
-will run against the real RPC unchanged (only `ROBINHOOD_RPC_URL` differs).
+manually with browser captcha resolution.
+
+**Resolved 2026-05-24**: user funded the deployer
+`0x14d0b2566bdE08B31FE4AED26fB5D4d209741351` with 0.001 ETH and 1 TSLA from
+the official faucet.
+
+---
+
+## Live Robinhood Chain testnet proof (2026-05-24)
+
+After A1 was completed, all four B scripts were re-executed against the
+**real** Robinhood Chain testnet (chain id 46630, RPC
+`https://rpc.testnet.chain.robinhood.com`). Total gas burn: ~0.00003 ETH
+(~$0.075 at current ETH price) across deploy + 6 bootstrap calls + 1 vote +
+1 acknowledge.
+
+### Live deployment
+
+| Item | Value |
+|---|---|
+| Chain | Robinhood Chain Testnet (id 46630) |
+| Registry | [`0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94`](https://explorer.testnet.chain.robinhood.com/address/0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94) |
+| Verified | Blockscout source verification: **Pass - Verified** |
+| Deployer / Owner / Relayer | `0x14d0b2566bdE08B31FE4AED26fB5D4d209741351` (single key for all roles in this demo) |
+
+### Live tx trace
+
+| Step | Tx | Note |
+|---|---|---|
+| B1 deploy Registry | (in `broadcast/Deploy.s.sol/46630/run-latest.json`) | constructor(relayer=deployer) |
+| B3.1 registerTicker TSLA | `0xc4638794bb9d85aac39c24cc94171394a847b90c28b914ccfa990e3bbe447498` | token = real Robinhood Chain TSLA `0xC9f9…3Bd4E` |
+| B3.2 registerMeeting TSLA-2025-ANNUAL | `0x460d91aa2369ee7e1548c43a8d5ca38479c257df96d0578984a904b1c1b8a0db` | 30-day voting window |
+| B3.3 registerTicker AMZN | `0x73fb12fc5a2498edd14c701b7079691ccb77eaacc11ae0ecacff4f5d2a5bc91e` | |
+| B3.4 registerMeeting AMZN-2026-ANNUAL | `0xd88f800f98e26432c66db9c1e752e5d4eb876dc413703586563bf51958490b10` | |
+| B3.5 registerTicker NFLX | `0x48afbec96ee82688e6034145f1de846c5248dd607f6c138654a444517b04afaa` | |
+| B3.6 registerMeeting NFLX-2026-ANNUAL | `0x02f6ca5bd3a6eb8ef5acd9022e4f0a219c6439037e660a2fba770b3e1e0b85b4` | |
+| B4 castVote TSLA item 2 AGAINST | `0x6cb067d5ee7ebd1c7128af26162b106cae24344c11eb1f2c9d2bd6d981adbc6e` | block 60266108, weight 1 TSLA, voter is the deployer |
+| B4 acknowledge uid | `0x4d331bec4c29691b9be5b92b8a2fb287d295f0f069e539e39bff8e88e8fa2c0b` | block 60267259, ackRef `BROADRIDGE-LIVE-1779606046` |
+
+All txs viewable at https://explorer.testnet.chain.robinhood.com.
+
+### Final attestation state on-chain
+
+```
+attestations(0xca7be70b6652d4538903a3df1f71cbbfc54e59ad8cc43244d1092aa20e3da6cc) = (
+  voter:         0x14d0b2566bdE08B31FE4AED26fB5D4d209741351
+  meetingId:     TSLA-2025-ANNUAL
+  itemId:        2
+  choice:        AGAINST (2)
+  weight:        1e18 (1 TSLA)
+  reasoningHash: 0xef0ec5727eb94f1001e699813b73a86d39b5a73448709b1206780a14ebe32568
+  timestamp:     1779605923
+  status:        ACKNOWLEDGED (1)
+  ackRef:        "BROADRIDGE-LIVE-1779606046"
+)
+```
+
+### Relayer note
+
+On the initial run, the mock relayer's `watchContractEvent` defaulted to
+`eth_newFilter` subscriptions which the public Robinhood Chain testnet RPC
+silently drops. The acknowledgement was issued by a manual `cast send` call
+into the same `acknowledge()` function the relayer would have used, producing
+an identical on-chain effect.
+
+For the next run we patched `packages/agent/scripts/mock-relayer.ts` to pass
+`{ poll: true, pollingInterval: 2000 }` to `watchContractEvent`. This forces
+HTTP `eth_getLogs` polling, which every JSON-RPC node supports. The relayer
+will now self-acknowledge on real testnet without manual intervention.
