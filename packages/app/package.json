@@ -15,6 +15,7 @@
     "@privy-io/wagmi": "^1.0.0",
     "@speakup/agent": "workspace:*",
     "@tanstack/react-query": "^5.59.20",
+    "@walletconnect/ethereum-provider": "^2.23.9",
     "next": "^15.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

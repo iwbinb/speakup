@@ -1,0 +1,34 @@
+[Unit]
+Description=SpeakUp Mock Broadridge Relayer
+Documentation=https://github.com/iwbinb/speakup
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=speakup
+Group=speakup
+WorkingDirectory=/opt/speakup
+EnvironmentFile=/etc/speakup/relayer.env
+# /etc/speakup/relayer.env must define:
+#   ROBINHOOD_RPC_URL=https://rpc.testnet.chain.robinhood.com
+#   ROBINHOOD_CHAIN_ID=46630
+#   REGISTRY=0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94
+#   RELAYER_PRIVATE_KEY=0x<owner-key>
+#   ACK_DELAY_SECONDS=2
+ExecStart=/usr/local/bin/bun run /opt/speakup/packages/agent/scripts/mock-relayer.ts
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=speakup-relayer
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/speakup
+
+[Install]
+WantedBy=multi-user.target

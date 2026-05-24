@@ -1,0 +1,40 @@
+# SpeakUp Caddyfile.
+# Drop this into /etc/caddy/Caddyfile (or include from a top-level config).
+# Caddy will fetch the cert via ACME on first request.
+
+speakup.vote {
+    encode gzip zstd
+
+    # API routes never cached: AI summaries + attestation queries
+    @api path /api/*
+    header @api Cache-Control "no-store"
+
+    # Long cache for hashed Next.js static assets
+    @nextStatic path /_next/static/*
+    header @nextStatic Cache-Control "public, max-age=31536000, immutable"
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        # CSP allows Privy + Anthropic + WalletConnect + the RPC hosts we call
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://auth.privy.io https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https: wss:; frame-src https:; font-src 'self' data:;"
+    }
+
+    reverse_proxy 127.0.0.1:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+    }
+
+    log {
+        output file /var/log/caddy/speakup.access.log
+        format json
+    }
+}
+
+# Redirect www -> apex
+www.speakup.vote {
+    redir https://speakup.vote{uri} permanent
+}

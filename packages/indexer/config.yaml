@@ -1,0 +1,46 @@
+name: speakup-indexer
+description: Envio HyperIndex tracking SpeakUpRegistry attestations across Robinhood Chain and Arbitrum Sepolia.
+
+networks:
+  - id: 46630
+    name: Robinhood Chain Testnet
+    start_block: 60265042
+    rpc_config:
+      url: https://rpc.testnet.chain.robinhood.com
+    contracts:
+      - name: SpeakUpRegistry
+        address:
+          - 0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94
+        handler: src/EventHandlers.ts
+        events:
+          - event: TickerRegistered(bytes32 indexed ticker, address indexed token, string cik)
+          - event: TickerDeactivated(bytes32 indexed ticker)
+          - event: MeetingRegistered(bytes32 indexed meetingId, bytes32 indexed ticker, uint64 voteOpen, uint64 voteDeadline, string defUrl)
+          - event: MeetingClosed(bytes32 indexed meetingId)
+          - event: VoteCast(bytes32 indexed uid, address indexed voter, bytes32 indexed meetingId, uint16 itemId, uint8 choice, uint256 weight)
+          - event: VoteAcknowledged(bytes32 indexed uid, uint8 status, string ackRef)
+          - event: RelayerUpdated(address indexed oldRelayer, address indexed newRelayer)
+
+  # Arbitrum Sepolia fallback. Filled with registry address after deploy:sepolia.
+  - id: 421614
+    name: Arbitrum Sepolia
+    start_block: 270000000
+    rpc_config:
+      url: https://sepolia-rollup.arbitrum.io/rpc
+    contracts:
+      - name: SpeakUpRegistry
+        address: []
+        handler: src/EventHandlers.ts
+        events:
+          - event: TickerRegistered(bytes32 indexed ticker, address indexed token, string cik)
+          - event: MeetingRegistered(bytes32 indexed meetingId, bytes32 indexed ticker, uint64 voteOpen, uint64 voteDeadline, string defUrl)
+          - event: VoteCast(bytes32 indexed uid, address indexed voter, bytes32 indexed meetingId, uint16 itemId, uint8 choice, uint256 weight)
+          - event: VoteAcknowledged(bytes32 indexed uid, uint8 status, string ackRef)
+
+# Performance: Envio HyperSync streaming for fast historical sync
+preload_handlers: false
+field_selection:
+  transaction_fields:
+    - hash
+  block_fields:
+    - timestamp

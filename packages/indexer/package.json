@@ -1,0 +1,14 @@
+{
+  "name": "@speakup/indexer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Envio HyperIndex tracking SpeakUpRegistry attestations across Robinhood Chain and Arbitrum Sepolia.",
+  "scripts": {
+    "codegen": "envio codegen",
+    "dev": "envio dev",
+    "start": "envio start"
+  },
+  "dependencies": {
+    "envio": "^2.0.0"
+  }
+}

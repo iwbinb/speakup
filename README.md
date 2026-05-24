@@ -153,6 +153,20 @@ Then follow `docs/e2e-proof.md` to deploy a MockERC20, register a ticker + meeti
 
 See [`CLAUDE.md`](./CLAUDE.md) for full project memory, [`docs/judge-review-self-check.md`](./docs/judge-review-self-check.md) for our self-scoring against the four judging dimensions, and [`docs/d1-research.md`](./docs/d1-research.md) for the initial research notes.
 
+## Pitch deck
+
+- **PDF**: [`docs/pitch-deck.pdf`](./docs/pitch-deck.pdf) (13 slides, Marp-rendered)
+- **HTML slides**: [`docs/pitch-deck.html`](./docs/pitch-deck.html) (open in browser, arrow keys to navigate)
+- **Markdown source**: [`docs/pitch-deck.md`](./docs/pitch-deck.md)
+- **Architecture diagram**: [`docs/architecture.md`](./docs/architecture.md)
+- **Production roadmap onepager**: [`docs/production-roadmap.md`](./docs/production-roadmap.md)
+- **Run book** (operator playbook): [`docs/runbook.md`](./docs/runbook.md)
+
+## Indexer + deploy
+
+- **GraphQL indexer** (Envio HyperIndex): [`packages/indexer/`](./packages/indexer/) — `bun run codegen && bun run dev` from there starts the local instance and GraphQL playground at http://localhost:8080
+- **Deploy recipes** (Caddy + systemd + Vercel): [`deploy/`](./deploy/) — full runbook from bare-metal Ubuntu host to public `speakup.vote` deployment
+
 ## License
 
 MIT.

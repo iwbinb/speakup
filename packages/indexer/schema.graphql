@@ -1,0 +1,78 @@
+# SpeakUp Envio HyperIndex schema.
+# Maps SpeakUpRegistry events into queryable entities so the front-end
+# can render holdings + meeting history + voter leaderboards without
+# hammering the chain.
+
+type Ticker @entity {
+  id: ID! # bytes32 ticker key, hex-encoded
+  symbol: String! # ascii-decoded from id, e.g. "TSLA"
+  token: String! # ERC-20 contract address
+  cik: String! # SEC CIK, e.g. "0001318605"
+  active: Boolean!
+  registeredAt: BigInt! # block timestamp
+  meetings: [Meeting!]! @derivedFrom(field: "ticker")
+}
+
+type Meeting @entity {
+  id: ID! # bytes32 meeting id
+  label: String! # ascii-decoded, e.g. "TSLA-2025-ANNUAL"
+  ticker: Ticker!
+  voteOpen: BigInt!
+  voteDeadline: BigInt!
+  defUrl: String!
+  active: Boolean!
+  registeredAt: BigInt!
+  votes: [Vote!]! @derivedFrom(field: "meeting")
+  totalVotes: Int!
+  totalWeight: BigInt!
+  forCount: Int!
+  againstCount: Int!
+  abstainCount: Int!
+}
+
+type Vote @entity {
+  id: ID! # uid (deterministic keccak256 of voter+meeting+item+chain+registry)
+  uid: String!
+  voter: Voter!
+  meeting: Meeting!
+  itemId: Int!
+  choice: Int! # 0=ABSTAIN 1=FOR 2=AGAINST
+  choiceLabel: String!
+  weight: BigInt!
+  reasoningHash: String!
+  castAt: BigInt! # block timestamp
+  castTxHash: String!
+  status: Int! # 0=PENDING 1=ACKNOWLEDGED 2=REJECTED
+  ackRef: String # populated after relayer ack
+  ackedAt: BigInt
+  ackTxHash: String
+}
+
+type Voter @entity {
+  id: ID! # address lowercase
+  address: String!
+  firstSeenAt: BigInt!
+  totalVotes: Int!
+  totalWeight: BigInt!
+  votes: [Vote!]! @derivedFrom(field: "voter")
+}
+
+# Convenience: per-meeting per-item tally for fast leaderboards.
+type ItemTally @entity {
+  id: ID! # `${meetingId}-${itemId}`
+  meeting: Meeting!
+  itemId: Int!
+  forWeight: BigInt!
+  againstWeight: BigInt!
+  abstainWeight: BigInt!
+  forCount: Int!
+  againstCount: Int!
+  abstainCount: Int!
+}
+
+type RelayerChange @entity {
+  id: ID! # tx hash
+  oldRelayer: String!
+  newRelayer: String!
+  changedAt: BigInt!
+}
