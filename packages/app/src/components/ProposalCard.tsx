@@ -1,6 +1,6 @@
 'use client';
 
-import type { Proposal, Recommendation, Choice } from '@speakup/agent';
+import type { Proposal, Recommendation, Choice } from '@speakup/agent/types';
 
 import { CopilotChat } from './CopilotChat';
 
@@ -13,63 +13,97 @@ type Props = {
 
 const choices: Choice[] = ['FOR', 'AGAINST', 'ABSTAIN'];
 
-export function ProposalCard({ proposal, recommendation, decision, onDecide }: Props) {
+export function ProposalCard({
+  proposal,
+  recommendation,
+  decision,
+  onDecide,
+}: Props) {
   return (
-    <article className="card space-y-4">
-      <header className="flex items-start justify-between gap-4">
-        <div className="min-w-0">
-          <p className="text-xs uppercase tracking-wide text-ink-500">
-            Proposal {proposal.itemId} · {labelForCategory(proposal.category)}
+    <article className="card card-hover space-y-5 animate-fade-up">
+      <header className="flex items-start gap-4">
+        <div className="shrink-0 w-10 h-10 rounded-2xl bg-ink-900 text-white flex items-center justify-center font-bold text-sm">
+          {proposal.itemId}
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-[11px] uppercase tracking-wider font-medium text-ink-500">
+            {labelForCategory(proposal.category)}
           </p>
-          <h3 className="text-lg font-semibold mt-1">{proposal.title}</h3>
-          <p className="text-sm text-ink-700 mt-2">{proposal.oneLineBackground}</p>
+          <h3 className="text-lg sm:text-xl font-semibold mt-0.5 text-ink-900 leading-snug">
+            {proposal.title}
+          </h3>
+          <p className="text-sm text-ink-700 mt-2 leading-relaxed">
+            {proposal.oneLineBackground}
+          </p>
         </div>
       </header>
 
       {proposal.keyDetails.length > 0 && (
-        <ul className="text-sm text-ink-700 list-disc list-inside space-y-1 pl-1">
+        <ul className="text-sm text-ink-700 space-y-1.5 pl-1">
           {proposal.keyDetails.map((d, i) => (
-            <li key={i}>{d}</li>
+            <li key={i} className="flex gap-2">
+              <span className="text-ink-300 mt-1.5 shrink-0">•</span>
+              <span className="leading-relaxed">{d}</span>
+            </li>
           ))}
         </ul>
       )}
 
-      <div className="grid sm:grid-cols-3 gap-3 text-sm">
+      <div className="grid sm:grid-cols-3 gap-2.5">
         <Stance label="Management" choice={proposal.managementRecommendation} />
         <Stance label="ISS" choice={proposal.iss?.stance ?? null} />
         <Stance label="Glass Lewis" choice={proposal.glassLewis?.stance ?? null} />
       </div>
 
       {recommendation && (
-        <div className="bg-brand-soft border border-brand/20 rounded-card p-4 space-y-2">
-          <p className="text-xs font-medium uppercase tracking-wide text-brand-dark">
-            SpeakUp recommends · {recommendation.recommended} · {recommendation.confidence} confidence
-          </p>
-          <ol className="text-sm text-ink-800 space-y-1 list-decimal list-inside">
+        <div className="bg-brand-soft border border-brand/20 rounded-2xl p-4 space-y-2.5">
+          <div className="flex items-center gap-2">
+            <SpeakUpDot />
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-dark">
+              SpeakUp recommends · {recommendation.recommended}
+            </p>
+            <ConfidenceBadge level={recommendation.confidence} />
+          </div>
+          <ol className="text-sm text-ink-800 space-y-1.5 pl-1">
             {recommendation.threeLineRationale.map((line, i) => (
-              <li key={i}>{line}</li>
+              <li key={i} className="flex gap-2">
+                <span className="text-brand-dark font-semibold shrink-0 mt-0.5 text-xs tabular-nums">
+                  {i + 1}.
+                </span>
+                <span className="leading-relaxed">{line}</span>
+              </li>
             ))}
           </ol>
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 pt-2 border-t border-ink-100">
+      <div className="flex flex-wrap gap-2 pt-3 border-t border-ink-100">
         {choices.map((c) => {
           const isPicked = decision === c;
-          const base = 'rounded-full text-sm font-medium px-4 py-2 border transition';
           const cls = isPicked
             ? c === 'FOR'
-              ? `${base} bg-brand text-white border-brand`
+              ? 'choice-btn-for'
               : c === 'AGAINST'
-                ? `${base} bg-red-600 text-white border-red-600`
-                : `${base} bg-ink-800 text-white border-ink-800`
-            : `${base} bg-white text-ink-700 border-ink-200 hover:bg-ink-100`;
+                ? 'choice-btn-against'
+                : 'choice-btn-abstain'
+            : 'choice-btn-idle';
           return (
-            <button key={c} className={cls} onClick={() => onDecide(c)}>
+            <button
+              key={c}
+              type="button"
+              className={cls}
+              onClick={() => onDecide(c)}
+              aria-pressed={isPicked}
+            >
               {c}
             </button>
           );
         })}
+        {decision && (
+          <span className="ml-auto self-center text-xs text-ink-500">
+            decided · click again to change
+          </span>
+        )}
       </div>
 
       <CopilotChat proposal={proposal} recommendation={recommendation} />
@@ -79,12 +113,36 @@ export function ProposalCard({ proposal, recommendation, decision, onDecide }: P
 
 function Stance({ label, choice }: { label: string; choice: Choice | null }) {
   return (
-    <div className="bg-ink-100 rounded-lg px-3 py-2">
-      <p className="text-xs text-ink-500">{label}</p>
-      <p className={`mt-0.5 font-semibold ${tintFor(choice)}`}>
+    <div className="bg-ink-50 border border-ink-100 rounded-xl px-3 py-2.5">
+      <p className="text-[10px] uppercase tracking-wider text-ink-500 font-medium">
+        {label}
+      </p>
+      <p className={`mt-0.5 font-semibold text-sm ${tintFor(choice)}`}>
         {choice ?? '—'}
       </p>
     </div>
+  );
+}
+
+function ConfidenceBadge({ level }: { level: Recommendation['confidence'] }) {
+  const map: Record<typeof level, { label: string; cls: string }> = {
+    high: { label: 'high confidence', cls: 'bg-brand text-white' },
+    medium: { label: 'medium confidence', cls: 'bg-amber-100 text-amber-800' },
+    low: { label: 'low confidence', cls: 'bg-ink-200 text-ink-700' },
+  };
+  const m = map[level];
+  return (
+    <span
+      className={`ml-auto text-[10px] uppercase tracking-wide font-medium px-2 py-0.5 rounded-full ${m.cls}`}
+    >
+      {m.label}
+    </span>
+  );
+}
+
+function SpeakUpDot() {
+  return (
+    <span className="w-2 h-2 rounded-full bg-brand inline-block animate-pulse-soft" />
   );
 }
 
@@ -115,6 +173,8 @@ function labelForCategory(cat: Proposal['category']): string {
       return 'M&A';
     case 'capital_structure':
       return 'Capital structure';
+    case 'corporate_structure':
+      return 'Corporate structure';
     default:
       return 'Other';
   }

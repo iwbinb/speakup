@@ -5,11 +5,24 @@
 @layer base {
   html,
   body {
-    @apply bg-ink-100 text-ink-900 antialiased;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    @apply bg-ink-50 text-ink-900 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
   }
   body {
     @apply min-h-screen;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(0, 200, 83, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 100% 0%, rgba(59, 153, 252, 0.05) 0%, transparent 35%),
+      linear-gradient(180deg, #f6f8fa 0%, #eef1f5 100%);
+    background-attachment: fixed;
+  }
+  /* Focus ring: visible only on keyboard nav, brand color */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand/60 ring-offset-2 ring-offset-white;
+  }
+  /* Tame default link underline only when inside .prose-fintech */
+  .prose-fintech a {
+    @apply text-brand-dark underline underline-offset-2 hover:text-brand;
   }
 }
 
@@ -17,11 +30,14 @@
   .card {
     @apply bg-white rounded-card shadow-card p-6;
   }
+  .card-hover {
+    @apply transition duration-200 hover:-translate-y-0.5 hover:shadow-card-lg;
+  }
   .btn-primary {
-    @apply inline-flex items-center justify-center bg-brand text-white font-medium rounded-full px-5 py-2.5 hover:bg-brand-dark transition;
+    @apply inline-flex items-center justify-center bg-brand text-white font-medium rounded-full px-5 py-2.5 transition hover:bg-brand-dark active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-brand;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center bg-white border border-ink-200 text-ink-800 font-medium rounded-full px-5 py-2.5 hover:bg-ink-100 transition;
+    @apply inline-flex items-center justify-center bg-white border border-ink-200 text-ink-800 font-medium rounded-full px-5 py-2.5 transition hover:bg-ink-100 active:scale-[0.98];
   }
   .pill {
     @apply inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full;
@@ -34,5 +50,105 @@
   }
   .pill-abstain {
     @apply pill bg-ink-100 text-ink-700;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply relative overflow-hidden bg-ink-100 rounded;
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  /* Choice button states for ProposalCard */
+  .choice-btn {
+    @apply rounded-full text-sm font-medium px-5 py-2 border transition-all duration-150 active:scale-95;
+  }
+  .choice-btn-idle {
+    @apply choice-btn bg-white text-ink-700 border-ink-200 hover:border-ink-300 hover:bg-ink-100;
+  }
+  .choice-btn-for {
+    @apply choice-btn bg-brand text-white border-brand shadow-sm;
+  }
+  .choice-btn-against {
+    @apply choice-btn bg-red-600 text-white border-red-600 shadow-sm;
+  }
+  .choice-btn-abstain {
+    @apply choice-btn bg-ink-800 text-white border-ink-800 shadow-sm;
+  }
+}
+
+@layer utilities {
+  /* Entry animation utility */
+  .animate-fade-up {
+    animation: fade-up 0.4s ease-out both;
+  }
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out both;
+  }
+  .animate-scale-in {
+    animation: scale-in 0.18s ease-out both;
+  }
+  .animate-pulse-soft {
+    animation: pulse-soft 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
   }
 }

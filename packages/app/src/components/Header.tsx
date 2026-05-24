@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAuth, type AuthMode } from '../lib/auth';
 import { useActiveChain } from '../lib/chain-context';
 import type { SupportedChainId } from '../lib/chains';
 import { ConnectWalletModal } from './ConnectWalletModal';
+import { LogoMark } from './Logo';
 
 export function Header() {
   const auth = useAuth();
@@ -17,17 +18,15 @@ export function Header() {
   const activeChain = chain.chains.find((c) => c.id === chain.activeChainId);
 
   return (
-    <header className="border-b border-ink-200 bg-white relative">
-      <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white font-bold shrink-0">
-            S
-          </div>
-          <span className="font-semibold text-lg">SpeakUp</span>
-          <span className="hidden md:inline text-xs text-ink-500 ml-2 truncate">
+    <header className="border-b border-ink-200/60 bg-white/80 backdrop-blur sticky top-0 z-30 relative">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+        <a href="/" className="flex items-center gap-2.5 min-w-0 group">
+          <LogoMark size={32} className="shrink-0 group-hover:scale-105 transition" />
+          <span className="font-semibold text-lg tracking-tight">SpeakUp</span>
+          <span className="hidden lg:inline text-xs text-ink-500 ml-1 truncate">
             Give every on-chain shareholder a voice
           </span>
-        </div>
+        </a>
 
         <div className="flex items-center gap-2 relative">
           {/* Chain selector */}
@@ -170,10 +169,19 @@ function IdentitySwitcher({
   const auth = useAuth();
   const [watchInput, setWatchInput] = useState<string>(auth.watchAddress ?? '');
 
+  // Esc to close
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
+
   return (
     <>
-      <div className="fixed inset-0 bg-black/30 z-40" onClick={onClose} />
-      <div className="absolute right-6 top-full mt-2 z-50 w-[360px] card shadow-xl">
+      <div className="fixed inset-0 bg-black/30 z-40 animate-fade-in" onClick={onClose} />
+      <div className="absolute right-4 sm:right-6 top-full mt-2 z-50 w-[360px] max-w-[calc(100vw-2rem)] card shadow-card-lg animate-scale-in origin-top-right">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold">Switch identity</h3>
           <button

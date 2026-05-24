@@ -14,6 +14,7 @@ const config: Config = {
           300: '#a9b3c8',
           200: '#d4daea',
           100: '#eef1f8',
+          50: '#f6f8fa',
         },
         brand: {
           DEFAULT: '#00c853',
@@ -30,6 +31,8 @@ const config: Config = {
       },
       boxShadow: {
         card: '0 1px 2px rgba(10, 15, 28, 0.04), 0 4px 16px rgba(10, 15, 28, 0.06)',
+        'card-lg':
+          '0 2px 4px rgba(10, 15, 28, 0.04), 0 12px 32px rgba(10, 15, 28, 0.1)',
       },
       borderRadius: {
         card: '16px',

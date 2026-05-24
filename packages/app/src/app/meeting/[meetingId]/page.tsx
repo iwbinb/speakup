@@ -129,27 +129,67 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
   return (
     <>
       <Header />
-      <main className="max-w-3xl mx-auto px-6 py-10 space-y-6">
-        <div>
-          <Link href="/" className="text-sm text-ink-500 hover:underline">
-            ← Back to holdings
+      {proposals && totalCount > 0 && (
+        <div className="sticky top-[57px] z-20 bg-white/85 backdrop-blur border-b border-ink-200/60">
+          <div className="max-w-3xl mx-auto px-6 py-2 flex items-center gap-3">
+            <p className="text-xs text-ink-500 shrink-0 tabular-nums">
+              {decidedCount} / {totalCount}
+            </p>
+            <div className="flex-1 h-1.5 bg-ink-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-brand transition-all duration-300 ease-out"
+                style={{
+                  width: `${totalCount === 0 ? 0 : (decidedCount / totalCount) * 100}%`,
+                }}
+              />
+            </div>
+            <p className="text-xs text-ink-500 shrink-0">decided</p>
+          </div>
+        </div>
+      )}
+      <main className="max-w-3xl mx-auto px-6 py-8 sm:py-10 space-y-6">
+        <div className="animate-fade-up">
+          <Link
+            href="/"
+            className="inline-flex items-center text-sm text-ink-500 hover:text-ink-900 transition gap-1"
+          >
+            <span aria-hidden>←</span> Back to holdings
           </Link>
-          <h1 className="text-3xl font-bold mt-2">{meeting.title}</h1>
-          <p className="text-ink-500 mt-1">
-            Meeting date: {meeting.date} ·{' '}
+          <h1 className="text-3xl sm:text-4xl font-bold mt-2 tracking-tight">
+            {meeting.title}
+          </h1>
+          <p className="text-ink-500 mt-1.5 text-sm">
+            Meeting date: <span className="text-ink-700">{meeting.date}</span>{' '}
+            ·{' '}
             <a
               href={meeting.defUrl}
               target="_blank"
               rel="noreferrer"
-              className="underline"
+              className="underline hover:text-brand-dark transition"
             >
               Source DEF 14A
             </a>
           </p>
         </div>
 
-        {loading && <div className="card text-ink-500">Reading the 100-page proxy for you…</div>}
-        {error && <div className="card border-l-4 border-red-500 text-red-700">{error}</div>}
+        {loading && (
+          <div className="space-y-3 animate-fade-in">
+            <div className="card space-y-3">
+              <div className="skeleton h-5 w-3/4" />
+              <div className="skeleton h-4 w-full" />
+              <div className="skeleton h-4 w-5/6" />
+              <div className="skeleton h-4 w-4/6" />
+            </div>
+            <p className="text-center text-sm text-ink-500">
+              Reading the 100-page proxy for you…
+            </p>
+          </div>
+        )}
+        {error && (
+          <div className="card border-l-4 border-red-500 text-red-700 animate-fade-in">
+            {error}
+          </div>
+        )}
 
         {proposals?.proposals.map((p) => (
           <ProposalCard

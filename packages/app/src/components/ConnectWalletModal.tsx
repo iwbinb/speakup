@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useConnect } from 'wagmi';
 
 import { useAuth } from '../lib/auth';
@@ -20,6 +20,15 @@ export function ConnectWalletModal({ onClose }: { onClose: () => void }) {
   const [filter, setFilter] = useState('');
   const [busyId, setBusyId] = useState<string | null>(null);
 
+  // Esc to close
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
+
   // Hide the bare "injected" entry when EIP-6963 produced richer entries.
   const detailed = connectors.filter(
     (c) => c.id !== 'injected' || connectors.length === 1,
@@ -38,7 +47,7 @@ export function ConnectWalletModal({ onClose }: { onClose: () => void }) {
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/40 z-50"
+        className="fixed inset-0 bg-black/40 z-50 animate-fade-in"
         onClick={onClose}
         aria-hidden
       />
@@ -46,7 +55,7 @@ export function ConnectWalletModal({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal
         aria-label="Connect wallet"
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[400px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[400px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-card-lg overflow-hidden animate-scale-in"
       >
         <ModalHeader onClose={onClose} />
 
