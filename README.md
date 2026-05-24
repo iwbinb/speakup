@@ -11,7 +11,7 @@ Submission for the [Arbitrum Open House London Online Buildathon](https://www.ha
 ## For judges: try it in 90 seconds
 
 - **Live demo**: https://speakup.vote (pending deploy, see below)
-- **Demo video (3 min)**: pending recording
+- **Demo video (3 min)**: https://youtu.be/qzmoaD1ajoU
 - **Repo**: this directory (will be public on GitHub at submission time)
 - **No setup needed**: the live demo runs in zero-config Demo Mode (no Privy app id, no Anthropic API key). Click around freely.
 

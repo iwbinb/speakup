@@ -115,7 +115,7 @@ Robinhood Chain, Arbitrum Sepolia.
 
 ```
 Demo URL:    https://speakup-2la.pages.dev
-Video:       (paste YouTube Unlisted link after recording)
+Video:       https://youtu.be/qzmoaD1ajoU
 GitHub:      https://github.com/iwbinb/speakup
 Pitch deck:  https://github.com/iwbinb/speakup/blob/main/docs/pitch-deck.pdf
 ```
@@ -143,7 +143,7 @@ Full e2e trace (8 tx hashes): docs/e2e-proof.md
 ## Pre-submission checklist (final 10 minutes)
 
 - [ ] GitHub repo flipped to public: `gh repo edit iwbinb/speakup --visibility public`
-- [ ] Video uploaded to YouTube Unlisted; URL pasted above
+- [x] Video uploaded to YouTube Unlisted; URL pasted above
 - [ ] All 4 fields above pasted verbatim into HackQuest form
 - [ ] Submit
 - [ ] DM @arbitrum and @robinhood on X with demo URL
