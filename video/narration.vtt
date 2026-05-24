@@ -1,0 +1,224 @@
+1
+00:00:00,050 --> 00:00:02,087
+You own a hundred shares of Tesla.
+
+2
+00:00:02,087 --> 00:00:08,500
+Every year you get to vote on who runs the company, on the C E O's pay, on whether to move to Texas.
+
+3
+00:00:08,500 --> 00:00:13,262
+And every year, seventy percent of retail shareholders skip the vote.
+
+4
+00:00:13,262 --> 00:00:17,650
+Because the proxy statement is a hundred pages of legalese.
+
+5
+00:00:17,650 --> 00:00:23,912
+Robinhood Chain is about to bring fifty million retail investors on-chain through tokenized stocks.
+
+6
+00:00:23,912 --> 00:00:29,775
+If we do nothing, that participation gap is amplified one thousand times.
+
+7
+00:00:29,775 --> 00:00:31,237
+SpeakUp closes it.
+
+8
+00:00:31,237 --> 00:00:32,600
+Before it forms.
+
+9
+00:00:32,600 --> 00:00:35,587
+This is the live demo, running on Cloudflare.
+
+10
+00:00:35,587 --> 00:00:41,200
+The header chip says DEMO, so you can explore the whole flow without setting up a wallet.
+
+11
+00:00:41,200 --> 00:00:42,937
+Three real tickers.
+
+12
+00:00:42,937 --> 00:00:45,312
+Tesla, Amazon, Netflix.
+
+13
+00:00:45,312 --> 00:00:49,137
+Each one a live Stock Token on Robinhood Chain testnet.
+
+14
+00:00:49,137 --> 00:00:50,312
+Open Tesla.
+
+15
+00:00:50,312 --> 00:00:54,975
+Seven proposals up for vote at the twenty twenty-five annual meeting.
+
+16
+00:00:54,975 --> 00:00:56,200
+Take item one.
+
+17
+00:00:56,200 --> 00:00:58,337
+The directors up for re-election.
+
+18
+00:00:58,337 --> 00:01:00,012
+Management says yes.
+
+19
+00:01:00,012 --> 00:01:04,837
+I S S, the largest independent proxy advisor, says no.
+
+20
+00:01:04,837 --> 00:01:08,425
+Glass Lewis, the second largest, says no.
+
+21
+00:01:08,425 --> 00:01:16,125
+SpeakUp's Advisor agent reads the full filing, weighs your stated preferences against both, and recommends AGAINST.
+
+22
+00:01:16,125 --> 00:01:17,425
+High confidence.
+
+23
+00:01:17,425 --> 00:01:18,675
+Three lines.
+
+24
+00:01:18,675 --> 00:01:20,225
+That's the whole decision.
+
+25
+00:01:20,225 --> 00:01:21,587
+Now item two.
+
+26
+00:01:21,587 --> 00:01:23,100
+The one that matters.
+
+27
+00:01:23,100 --> 00:01:26,512
+The fifty-six billion dollar Musk performance package.
+
+28
+00:01:26,512 --> 00:01:29,437
+The Delaware court tore it up in twenty twenty-four.
+
+29
+00:01:29,437 --> 00:01:31,000
+Now it's being re-voted.
+
+30
+00:01:31,000 --> 00:01:35,625
+Largest C E O compensation package in U S history.
+
+31
+00:01:35,625 --> 00:01:37,625
+SpeakUp recommends AGAINST.
+
+32
+00:01:37,625 --> 00:01:39,137
+I S S agrees.
+
+33
+00:01:39,137 --> 00:01:40,762
+Glass Lewis agrees.
+
+34
+00:01:40,762 --> 00:01:42,487
+You tap once and move on.
+
+35
+00:01:42,487 --> 00:01:46,612
+Every vote becomes an on-chain attestation on Robinhood Chain.
+
+36
+00:01:46,612 --> 00:01:50,250
+The Registry contract is verified on Blockscout.
+
+37
+00:01:50,250 --> 00:01:57,587
+Eight transaction hashes are documented in the repo, proving the full deploy plus vote plus acknowledge cycle.
+
+38
+00:01:57,587 --> 00:02:00,525
+One signature records all your decisions.
+
+39
+00:02:00,525 --> 00:02:04,062
+A mock relayer bridges to Broadridge in production.
+
+40
+00:02:04,062 --> 00:02:06,750
+Three things we want judges to take away.
+
+41
+00:02:06,750 --> 00:02:07,487
+One.
+
+42
+00:02:07,487 --> 00:02:12,750
+We built directly on Robinhood Chain, with their native Stock Tokens, not a wrapper.
+
+43
+00:02:12,750 --> 00:02:13,450
+Two.
+
+44
+00:02:13,450 --> 00:02:17,162
+The product is three specialized Anthropic agents.
+
+45
+00:02:17,162 --> 00:02:17,987
+Reader.
+
+46
+00:02:17,987 --> 00:02:18,962
+Advisor.
+
+47
+00:02:18,962 --> 00:02:20,075
+Executor.
+
+48
+00:02:20,075 --> 00:02:22,037
+The core, not a sidecar.
+
+49
+00:02:22,037 --> 00:02:22,837
+Three.
+
+50
+00:02:22,837 --> 00:02:29,212
+Tokenized equity governance is the unwritten chapter in Robinhood Chain's own roadmap.
+
+51
+00:02:29,212 --> 00:02:30,512
+There is no incumbent.
+
+52
+00:02:30,512 --> 00:02:37,787
+SpeakUp is competing for the Robinhood Overall slot, Best Agentic Project, and a seat at Founder House London.
+
+53
+00:02:37,787 --> 00:02:42,575
+Code on GitHub at i w b i n b slash speakup.
+
+54
+00:02:42,575 --> 00:02:44,125
+Live at speak up dot vote.
+
+55
+00:02:44,125 --> 00:02:47,025
+Give every on-chain shareholder a voice.
+
+56
+00:02:47,025 --> 00:02:47,875
+Thank you.
+

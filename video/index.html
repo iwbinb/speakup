@@ -227,7 +227,7 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="178"
+      data-duration="168"
       data-width="1920"
       data-height="1080"
     >
@@ -235,13 +235,13 @@
         id="narration"
         class="clip"
         data-start="0"
-        data-duration="177"
+        data-duration="168"
         data-track-index="0"
         src="./narration.wav"
       ></audio>
 
       <!-- BEAT 1 · HOOK (0 – 19.84s) -->
-      <div id="b1" class="clip scene" data-start="0" data-duration="19.84" data-track-index="1">
+      <div id="b1" class="clip scene" data-start="0.05" data-duration="17.59" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp</span></div>
           <div id="b1-tesla" class="hook-tesla">
@@ -261,7 +261,7 @@
       </div>
 
       <!-- BEAT 2 · STAKES (19.84 – 35.12s) -->
-      <div id="b2" class="clip scene" data-start="19.84" data-duration="15.28" data-track-index="1">
+      <div id="b2" class="clip scene" data-start="17.65" data-duration="14.94" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp</span></div>
           <div id="b2-counter" class="counter">0</div>
@@ -274,7 +274,7 @@
       </div>
 
       <!-- BEAT 3 · LIVE PRODUCT (35.12 – 52.56s) -->
-      <div id="b3" class="clip scene vignette" data-start="35.12" data-duration="17.44" data-track-index="1">
+      <div id="b3" class="clip scene vignette" data-start="32.6" data-duration="16.53" data-track-index="1">
         <div id="b3-shot1" class="shot shot-1"></div>
         <div id="b3-shot2" class="shot shot-2" style="opacity:0;"></div>
         <div class="label-overlay" id="b3-label" style="opacity:0;">
@@ -285,7 +285,7 @@
       </div>
 
       <!-- BEAT 4 · PROPOSAL WALK (52.56 – 85.73s) -->
-      <div id="b4" class="clip scene vignette" data-start="52.56" data-duration="33.17" data-track-index="1">
+      <div id="b4" class="clip scene vignette" data-start="49.14" data-duration="31.07" data-track-index="1">
         <div id="b4-shot" class="shot shot-5"></div>
         <div class="label-overlay" id="b4-label" style="opacity:0;">
           <div class="kicker">Tesla 2025 · Item 1 · Director election</div>
@@ -295,7 +295,7 @@
       </div>
 
       <!-- BEAT 5 · MUSK PEAK (85.73 – 109.64s) -->
-      <div id="b5" class="clip scene vignette" data-start="85.73" data-duration="23.91" data-track-index="1">
+      <div id="b5" class="clip scene vignette" data-start="80.22" data-duration="22.26" data-track-index="1">
         <div id="b5-shot" class="shot shot-6"></div>
         <div id="b5-ghost" class="ghost-amount" style="opacity:0;">$56,000,000,000</div>
         <div class="label-overlay" id="b5-label" style="opacity:0; bottom: 100px;">
@@ -306,7 +306,7 @@
       </div>
 
       <!-- BEAT 6 · ON-CHAIN PROOF (109.64 – 131.80s) -->
-      <div id="b6" class="clip scene" data-start="109.64" data-duration="22.16" data-track-index="1">
+      <div id="b6" class="clip scene" data-start="102.49" data-duration="21.56" data-track-index="1">
         <div class="scene-content" style="background: linear-gradient(180deg, #f6f8fa 0%, #eef1f8 100%);">
           <div class="explorer">
             <span class="verified">● SpeakUpRegistry · Blockscout VERIFIED</span>
@@ -326,7 +326,7 @@
       </div>
 
       <!-- BEAT 7 · WHY WE WIN (131.80 – 159.68s) -->
-      <div id="b7" class="clip scene" data-start="131.80" data-duration="27.88" data-track-index="1">
+      <div id="b7" class="clip scene" data-start="124.06" data-duration="26.44" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp · why we win</span></div>
           <div class="three-cards">
@@ -350,7 +350,7 @@
       </div>
 
       <!-- BEAT 8 · CLOSE (159.68 – 177s) -->
-      <div id="b8" class="clip scene" data-start="159.68" data-duration="17.32" data-track-index="1">
+      <div id="b8" class="clip scene" data-start="150.51" data-duration="17.37" data-track-index="1">
         <div class="scene-content">
           <div id="b8-logo" class="logo-mark" style="opacity:0;">
             <svg viewBox="0 0 48 48" fill="white">
@@ -380,7 +380,7 @@
       const tl = gsap.timeline({ paused: true });
 
       // Beat anchors (from whisper transcript of Flo @ rate 200)
-      const B1=0, B2=19.84, B3=35.12, B4=52.56, B5=85.73, B6=109.64, B7=131.80, B8=159.68;
+      const B1=0.05, B2=17.65, B3=32.60, B4=49.14, B5=80.22, B6=102.49, B7=124.06, B8=150.51;
 
       /* Beat 1 · Hook (0–19.84s) */
       tl.from('#b1-tesla', { scale: 0.6, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, B1, 'auto');
