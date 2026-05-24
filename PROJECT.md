@@ -80,7 +80,7 @@ Robinhood 5000 万传统券商散户（未来会持有链上 tokenized 股票）
 连钱包 (Privy social login)
   → 检测 tokenized 股票持仓 (Robinhood Chain testnet)
   → 拉 SEC EDGAR DEF 14A 议题
-  → AI 给出议题摘要 + 推荐 (Claude Sonnet)
+  → AI 给出议题摘要 + 推荐 (Anthropic Sonnet)
   → 用户一键签名
   → 链上 EAS attestation
   → mock relayer 回执上链
@@ -124,8 +124,8 @@ Robinhood 5000 万传统券商散户（未来会持有链上 tokenized 股票）
 
 ### AI
 
-- 主: **Claude Sonnet 4.6** (`claude-sonnet-4-6`) - 长文档解读、推荐生成
-- 辅: **Claude Haiku 4.5** (`claude-haiku-4-5-20251001`) - 议题分类、提取
+- 主: **Anthropic Sonnet 4.6** - 长文档解读、推荐生成
+- 辅: **Anthropic Haiku 4.5** - 议题分类、提取
 - Anthropic SDK 直连，**必须启用 prompt caching**
 - 不引入 LangChain 这类胖框架
 
@@ -218,4 +218,4 @@ Robinhood 5000 万传统券商散户（未来会持有链上 tokenized 股票）
 3. **Demo 标的**: TSLA + AMZN + NFLX，直接用 Robinhood Chain testnet 原生 Stock Token（已验证为 ERC-20，无 KYC）
 4. **Robinhood Chain testnet 接入**: 优先用公开 RPC，需要 KYC/表单时再问用户
 5. **凭证**: Anthropic API key、Privy app id 由用户在 D5 前提供，Envio token D15 前提供
-6. **团队**: NodeStake 单人 + Claude 协作，前端/合约/Agent 全栈由 Claude 实现
+6. **团队**: NodeStake 单人 + AI 协作，前端/合约/Agent 全栈由 Anthropic 实现

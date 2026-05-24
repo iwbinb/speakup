@@ -57,3 +57,6 @@ tmp/
 # packages/contracts/lib/  -- intentionally NOT ignored
 
 # Bun lockfile is committed; bun.lockb (binary) -> bun.lock (text) auto-managed
+
+# Claude Code local config
+.claude/
