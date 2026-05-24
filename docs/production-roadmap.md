@@ -6,7 +6,7 @@ End-to-end MVP on Robinhood Chain testnet:
 
 - Privy social login (Google / Apple / email)
 - Auto-detected holdings of TSLA / AMZN / NFLX
-- Live SEC EDGAR DEF 14A parsing + Claude Sonnet 4.6 summary + personalized recommendation
+- Live SEC EDGAR DEF 14A parsing + Anthropic Sonnet 4.6 summary + personalized recommendation
 - One-click `castVotes` signature → on-chain attestation
 - Mock relayer acknowledges within 10 seconds
 - Dual deploy: Robinhood Chain testnet (46630) + Arbitrum Sepolia (421614)

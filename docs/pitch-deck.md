@@ -73,9 +73,9 @@ Detect tokenized holdings (Robinhood Chain ERC-20)
      ↓
 Pull SEC EDGAR DEF 14A
      ↓
-Reader Agent (Claude Sonnet 4.6): 100 pages → structured proposals
+Reader Agent (Anthropic Sonnet 4.6): 100 pages → structured proposals
      ↓
-Advisor Agent (Claude Sonnet 4.6): personalized recommendations
+Advisor Agent (Anthropic Sonnet 4.6): personalized recommendations
      ↓
 One-click sign → EAS-style attestation on-chain
      ↓
@@ -102,7 +102,7 @@ Live demo: **speakup.vote** · Registry: `0xb6D8E46BF9e48aDD4747595b2e437Eb32707
 
 - **Chains**: Robinhood Chain testnet (46630) + Arbitrum Sepolia (421614), dual-deploy
 - **Contracts**: `SpeakUpRegistry` (Solidity 0.8.28, Foundry, EAS-style schema), Blockscout-verified
-- **Agents**: 3 Claude Sonnet 4.6 agents with prompt caching (Reader, Advisor, Executor)
+- **Agents**: 3 Anthropic Sonnet 4.6 agents with prompt caching (Reader, Advisor, Executor)
 - **Frontend**: Next.js 15 + viem + wagmi + Privy embedded wallet + WalletConnect
 - **Indexer**: Envio HyperIndex on attestation events
 - **Relayer**: viem `watchContractEvent` (polling mode) + delayed `acknowledge()` tx
@@ -117,7 +117,7 @@ Live demo: **speakup.vote** · Registry: `0xb6D8E46BF9e48aDD4747595b2e437Eb32707
 1. **Robinhood Chain quota** (Overall 3 reserved 1 slot for Robinhood-Chain projects):
    we use Robinhood Chain native Stock Tokens (TSLA / AMZN / NFLX) as the entire
    demo surface, not a wrapper
-2. **Best Agentic Project** ($15K): three specialised Claude agents are the
+2. **Best Agentic Project** ($15K): three specialised Anthropic agents are the
    core product, not a sidecar
 3. **Judge-aligned narrative**: tokenized equity governance is the unwritten
    chapter in Robinhood Chain's own product roadmap
@@ -144,7 +144,7 @@ We are building the **governance OS** for the RWA era.
 | Tally / Boardroom / Aragon AI | DAO governance only | Real public-company governance |
 | Spout / Ondo / Dinari | Issue tokens, no governance UX | Layered on top, opt-in |
 
-We are the first to fuse **public-company proxy voting + on-chain attestation + Claude**.
+We are the first to fuse **public-company proxy voting + on-chain attestation + Anthropic**.
 
 ---
 
@@ -165,7 +165,7 @@ We are the first to fuse **public-company proxy voting + on-chain attestation + 
 - Long-time validator operator across **Cosmos Hub, Celestia, Monad, Starknet, Gno.land, TRUF.NETWORK, TAC**
 - Multi-cloud + bare-metal infrastructure (Caddy + systemd)
 - Deep on-chain governance experience: votes professionally on every major Cosmos and Arbitrum DAO proposal
-- Building SpeakUp solo + Claude collaboration
+- Building SpeakUp solo + AI assistant
 
 Open positions post-grant: **1 FE engineer, 1 BD lead** for tokenized equity issuer partnerships.
 

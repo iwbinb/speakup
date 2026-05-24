@@ -57,7 +57,7 @@ Last updated 2026-05-24.
 
 | Sub-dimension | Evidence |
 |---|---|
-| New unlock | LLM-driven DEF 14A summarisation only became production-quality with Claude Sonnet 4.6 (2024-2025). This category did not exist before. |
+| New unlock | LLM-driven DEF 14A summarisation only became production-quality with Anthropic Sonnet 4.6 (2024-2025). This category did not exist before. |
 | Three-agent architecture | `packages/agent/`: Reader (Sonnet, ingestion + structuring), Advisor (Sonnet, recommendation + rationale), Executor (Haiku, transaction packing). Independently prompt-engineered with prompt caching on the long DEF 14A input. |
 | Demo Mode | Zero-config evaluation path: judges can experience the full UX with no Anthropic key, no Privy app id, no wallet, no faucet. Most hackathon projects skip this. |
 | Watch mode + ENS resolution | Paste any 0x address OR ENS name (vitalik.eth) to see what a real user would see. `packages/app/src/lib/ens.ts` resolves on-chain via mainnet ENS. |

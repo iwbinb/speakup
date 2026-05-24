@@ -1,6 +1,6 @@
 # D1 Research Notes
 
-记录 D1 阶段的关键技术调研结论。所有结论须在 D5 开始合约开发前 freeze 进 CLAUDE.md。
+记录 D1 阶段的关键技术调研结论。所有结论须在 D5 开始合约开发前 freeze 进 PROJECT.md。
 
 最后更新：2026-05-23
 
@@ -142,7 +142,7 @@ dTSLA (Dinari) + bCSPX (Backed) + dAAPL (Dinari)
 
 - 原始 HTML：4.5 MB / 42,566 行
 - 关键术语密度：Proposal 350 / Compensation 455 / Director 420 次
-- 纯文本提取后预估 200-500 KB，单次 Claude Sonnet 4.6（200K context）可一次容纳
+- 纯文本提取后预估 200-500 KB，单次 Anthropic Sonnet 4.6（200K context）可一次容纳
 - prompt caching 启用后重复解读同文档成本可降至 $0.02 量级
 
 ### D5-D9 实现要点

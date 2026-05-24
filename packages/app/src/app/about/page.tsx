@@ -174,7 +174,7 @@ export default function AboutPage() {
               Arbitrum Open House London Online Buildathon
             </a>
             . Built on Arbitrum Orbit (Robinhood Chain), using EAS-style
-            attestations, Claude AI, and EDGAR data.
+            attestations, Anthropic AI, and EDGAR data.
           </p>
         </Section>
       </main>

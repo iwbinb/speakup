@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { wagmiConfig } from './lib/wagmi';
 import { robinhoodTestnet } from './lib/chains';
 import { ChainProvider } from './lib/chain-context';
-import { DemoAuthProvider, RealAuthProvider, isDemoMode } from './lib/auth';
+import { DemoAuthProvider, isDemoMode } from './lib/auth';
+import { RealAuthProvider } from './lib/auth-real';
 import { ToastProvider } from './components/Toast';
 import { CommandPalette } from './components/CommandPalette';
 

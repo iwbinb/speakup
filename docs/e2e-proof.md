@@ -23,7 +23,7 @@ connect wallet
 | 1 | connect wallet | Privy embedded wallet in `Providers.tsx`; demo-mode fallback in `lib/auth.tsx` |
 | 2 | detect holdings | `useHoldings.ts` reads `balanceOf` via wagmi `useReadContracts` against 3 Robinhood Chain testnet Stock Tokens; demo mode returns hardcoded `TSLA 10 / AMZN 5 / NFLX 20` |
 | 3 | fetch DEF 14A | `packages/agent/src/edgar.ts` with EDGAR User-Agent + 10 req/s limit; tested in D1 against TSLA / AMZN / NFLX CIK |
-| 4 | AI summary + rec | `agents/{reader,advisor}.ts` (Claude Sonnet); `DEMO_PROPOSALS` ships pre-canned recommendations when ANTHROPIC_API_KEY is absent so judges see the output without provisioning a key |
+| 4 | AI summary + rec | `agents/{reader,advisor}.ts` (Anthropic Sonnet); `DEMO_PROPOSALS` ships pre-canned recommendations when ANTHROPIC_API_KEY is absent so judges see the output without provisioning a key |
 | 5 | user signs | `castVote` called via wagmi `useWriteContract` (real EOA sign); evidence below |
 | 6 | on-chain attestation | `SpeakUpRegistry.castVote` writes `VoteAttestation` + emits `VoteCast(uid, voter, meetingId, itemId, choice, weight)`; evidence below |
 | 7 | relayer ack | `packages/agent/scripts/mock-relayer.ts` watches `VoteCast`, after delay calls `acknowledge(uid, ACKNOWLEDGED, ackRef)` emitting `VoteAcknowledged`; evidence below |

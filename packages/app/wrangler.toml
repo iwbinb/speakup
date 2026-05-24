@@ -1,0 +1,11 @@
+name = "speakup"
+compatibility_date = "2026-05-24"
+compatibility_flags = ["nodejs_compat"]
+
+# next-on-pages emits build artifacts to .vercel/output/static
+pages_build_output_dir = ".vercel/output/static"
+
+# Public env vars (NEXT_PUBLIC_*) bake into the client bundle at build time;
+# server-side env vars (ANTHROPIC_API_KEY etc) are set via:
+#   wrangler pages secret put <NAME> --project-name speakup
+# or via the Cloudflare dashboard for the production environment.

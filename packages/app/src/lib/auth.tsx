@@ -1,61 +1,21 @@
 'use client';
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
-import { usePrivy } from '@privy-io/react-auth';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
 import { isAddress } from 'viem';
 
+import {
+  AuthContext,
+  DEMO_ADDRESS,
+  isDemoMode,
+  type AuthMode,
+  type AuthState,
+} from './auth-context';
 import { useActiveChain } from './chain-context';
 
-/**
- * Demo wallet address. Used in demo mode (when NEXT_PUBLIC_PRIVY_APP_ID is
- * unset) so that hackathon judges can explore the product without setting
- * up Privy. Matches the fresh testnet deployer generated during local
- * validation; fund it via Robinhood Chain faucet for realistic holdings.
- */
-export const DEMO_ADDRESS: `0x${string}` =
-  '0x14d0b2566bdE08B31FE4AED26fB5D4d209741351';
-
-export const isDemoMode = !process.env['NEXT_PUBLIC_PRIVY_APP_ID'];
-
-/**
- * Three ways to acquire an identity in the no-Privy preview build:
- *   demo   - hardcoded DEMO_ADDRESS (default; judge zero-setup)
- *   watch  - user-entered observer address, read-only
- *   wallet - connected EIP-1193 wallet (MetaMask, Rabby, etc.), can sign
- */
-export type AuthMode = 'demo' | 'watch' | 'wallet';
-
-export type AuthState = {
-  ready: boolean;
-  authenticated: boolean;
-  address: `0x${string}` | undefined;
-  canSign: boolean;
-  mode: AuthMode;
-  isDemoMode: boolean;
-  // Mode controls
-  setDemoMode: () => void;
-  /** Returns true on success (valid 0x address); false otherwise. */
-  setWatchAddress: (addr: string) => boolean;
-  watchAddress: `0x${string}` | undefined;
-  connectWallet: () => Promise<void>;
-  /** Connect with a specific wagmi connector id (used by ConnectWalletModal). */
-  connectWalletById: (connectorId: string) => Promise<void>;
-  /** Last connection error from wagmi, surfaced to the modal. */
-  connectError: string | null;
-  // Legacy Privy interface
-  login: () => void;
-  logout: () => void;
-};
-
-const AuthContext = createContext<AuthState | null>(null);
+// Re-export so existing imports keep working.
+export { DEMO_ADDRESS, isDemoMode, useAuth } from './auth-context';
+export type { AuthMode, AuthState } from './auth-context';
 
 const LS_MODE = 'speakup.authMode';
 const LS_WATCH = 'speakup.watchAddress';
@@ -206,32 +166,6 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export function RealAuthProvider({ children }: { children: ReactNode }) {
-  const { ready, authenticated, user, login, logout } = usePrivy();
-  const address = user?.wallet?.address as `0x${string}` | undefined;
-  const value: AuthState = {
-    ready,
-    authenticated,
-    address,
-    canSign: authenticated && !!address,
-    mode: 'wallet',
-    isDemoMode: false,
-    setDemoMode: () => {},
-    setWatchAddress: () => false,
-    watchAddress: undefined,
-    connectWallet: async () => login(),
-    connectWalletById: async () => login(),
-    connectError: null,
-    login,
-    logout,
-  };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth(): AuthState {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error('useAuth must be used inside an Auth provider');
-  }
-  return ctx;
-}
+// RealAuthProvider (Privy-backed) is in ./auth-real.tsx and only loaded
+// when NEXT_PUBLIC_PRIVY_APP_ID is set, so the Edge bundle doesn't pull in
+// the Privy SDK in demo deployments.

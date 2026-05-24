@@ -62,7 +62,7 @@ In 2024 the SEC adopted Rule 14a-19 (universal proxy) and in 2025 the staff prop
 
 ### 3. LLM quality threshold finally crossed
 
-Claude Sonnet 4.6 ([Anthropic release notes][sonnet-4-6]) reliably summarises 100+ page DEF 14A filings into structured JSON with ISS-comparable accuracy on a measured proposal-classification eval (we will publish the full eval before submission). This was not possible at production quality before mid-2024.
+Anthropic Sonnet 4.6 ([Anthropic release notes][sonnet-4-6]) reliably summarises 100+ page DEF 14A filings into structured JSON with ISS-comparable accuracy on a measured proposal-classification eval (we will publish the full eval before submission). This was not possible at production quality before mid-2024.
 
 ---
 

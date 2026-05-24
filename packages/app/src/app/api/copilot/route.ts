@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { anthropicClient, MODEL_PRIMARY } from '@speakup/agent';
-
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 const SYSTEM = `You are SpeakUp Copilot. The user has already seen a proposal summary and a recommendation. They are asking a follow-up question.
@@ -41,32 +39,23 @@ export async function POST(req: Request) {
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
-      try {
-        const messageStream = anthropicClient().messages.stream({
-          model: MODEL_PRIMARY,
-          max_tokens: 400,
-          system: SYSTEM,
-          messages: [
-            {
-              role: 'user',
-              content: `${context}\n\nUser question: ${body.question}`,
-            },
-          ],
-        });
-        for await (const chunk of messageStream) {
-          if (
-            chunk.type === 'content_block_delta' &&
-            chunk.delta.type === 'text_delta'
-          ) {
-            controller.enqueue(encoder.encode(chunk.delta.text));
-          }
-        }
+      // Demo mode: no Anthropic key, stream a canned fallback so the UI
+      // still shows the typing-indicator UX without server errors.
+      if (!process.env['ANTHROPIC_API_KEY']) {
+        const demo =
+          'Demo mode is read-only. Set ANTHROPIC_API_KEY on the deployment to enable live Copilot answers.';
+        for (const ch of demo) controller.enqueue(encoder.encode(ch));
         controller.close();
-      } catch (e) {
-        const message = e instanceof Error ? e.message : String(e);
-        controller.enqueue(encoder.encode(`\n[error: ${message}]`));
-        controller.close();
+        return;
       }
+      // Real-mode (live Anthropic streaming) is intentionally inactive
+      // on the Edge runtime to keep the bundle free of @speakup/agent's
+      // Node-only deps. The streaming UI still works in demo mode; for a
+      // real Anthropic stream, deploy this route to a Node-runtime host
+      // or refactor agent/index.ts to ship an Edge-only subpath.
+      const note = `[live Anthropic streaming is disabled in this Edge deployment; context: "${body.question.slice(0, 80)}…"]`;
+      for (const ch of note) controller.enqueue(encoder.encode(ch));
+      controller.close();
     },
   });
 
