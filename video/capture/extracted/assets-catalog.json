@@ -1,0 +1,103 @@
+[
+  {
+    "url": "https://unavatar.io/x/Tesla",
+    "type": "Image",
+    "contexts": [
+      "img[src]"
+    ],
+    "notes": "TSLA logo",
+    "description": "TSLA logo",
+    "nearestHeading": "Your demo holdings",
+    "sectionClasses": "max-w-5xl mx-auto px-6 py-10",
+    "aboveFold": true
+  },
+  {
+    "url": "https://unavatar.io/x/amazon",
+    "type": "Image",
+    "contexts": [
+      "img[src]"
+    ],
+    "notes": "AMZN logo",
+    "description": "AMZN logo",
+    "nearestHeading": "Your demo holdings",
+    "sectionClasses": "max-w-5xl mx-auto px-6 py-10",
+    "aboveFold": true
+  },
+  {
+    "url": "https://unavatar.io/x/netflix",
+    "type": "Image",
+    "contexts": [
+      "img[src]"
+    ],
+    "notes": "NFLX logo",
+    "description": "NFLX logo",
+    "nearestHeading": "Your demo holdings",
+    "sectionClasses": "max-w-5xl mx-auto px-6 py-10",
+    "aboveFold": true
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/e4af272ccee01ff0-s.p.woff2",
+    "type": "Font",
+    "contexts": [
+      "link[rel=\"preload\"]",
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/chunks/webpack-d5098cd509f2a2d3.js",
+    "type": "Other",
+    "contexts": [
+      "link[rel=\"preload\"]"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/ba9851c3c22cd980-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/21350d82a1f187e9-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/c5fe6dc8356a8c31-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/19cfc7226ec3afaa-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/df0a9ae256c0569c-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  },
+  {
+    "url": "https://speakup-2la.pages.dev/_next/static/media/8e9860b6e62d6359-s.woff2",
+    "type": "Font",
+    "contexts": [
+      "css url()"
+    ],
+    "notes": null
+  }
+]

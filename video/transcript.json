@@ -1,0 +1,1837 @@
+[
+  {
+    "text": "You",
+    "start": 0.01,
+    "end": 0.23
+  },
+  {
+    "text": "own",
+    "start": 0.23,
+    "end": 0.46
+  },
+  {
+    "text": "a",
+    "start": 0.46,
+    "end": 0.53
+  },
+  {
+    "text": "hundred",
+    "start": 0.53,
+    "end": 1.06
+  },
+  {
+    "text": "shares",
+    "start": 1.06,
+    "end": 1.51
+  },
+  {
+    "text": "of",
+    "start": 1.6,
+    "end": 1.67
+  },
+  {
+    "text": "Tesla.",
+    "start": 1.67,
+    "end": 2.08
+  },
+  {
+    "text": "Every",
+    "start": 2.09,
+    "end": 2.38
+  },
+  {
+    "text": "year",
+    "start": 2.38,
+    "end": 2.62
+  },
+  {
+    "text": "you",
+    "start": 2.62,
+    "end": 2.8
+  },
+  {
+    "text": "get",
+    "start": 2.8,
+    "end": 2.98
+  },
+  {
+    "text": "to",
+    "start": 2.98,
+    "end": 3.1
+  },
+  {
+    "text": "vote",
+    "start": 3.1,
+    "end": 3.32
+  },
+  {
+    "text": "on",
+    "start": 3.42,
+    "end": 3.51
+  },
+  {
+    "text": "who",
+    "start": 3.51,
+    "end": 3.73
+  },
+  {
+    "text": "runs",
+    "start": 3.73,
+    "end": 3.9
+  },
+  {
+    "text": "the",
+    "start": 4.14,
+    "end": 4.25
+  },
+  {
+    "text": "company,",
+    "start": 4.26,
+    "end": 4.8
+  },
+  {
+    "text": "on",
+    "start": 4.81,
+    "end": 4.98
+  },
+  {
+    "text": "the",
+    "start": 4.98,
+    "end": 5.26
+  },
+  {
+    "text": "CEO's",
+    "start": 5.26,
+    "end": 5.72
+  },
+  {
+    "text": "pay,",
+    "start": 5.72,
+    "end": 6.22
+  },
+  {
+    "text": "on",
+    "start": 6.22,
+    "end": 6.31
+  },
+  {
+    "text": "whether",
+    "start": 6.39,
+    "end": 6.95
+  },
+  {
+    "text": "to",
+    "start": 6.95,
+    "end": 7.11
+  },
+  {
+    "text": "move",
+    "start": 7.11,
+    "end": 7.44
+  },
+  {
+    "text": "to",
+    "start": 7.44,
+    "end": 7.6
+  },
+  {
+    "text": "Texas.",
+    "start": 7.6,
+    "end": 8.04
+  },
+  {
+    "text": "And",
+    "start": 8.05,
+    "end": 8.25
+  },
+  {
+    "text": "every",
+    "start": 8.25,
+    "end": 8.6
+  },
+  {
+    "text": "year,",
+    "start": 8.6,
+    "end": 9.04
+  },
+  {
+    "text": "70%",
+    "start": 9.04,
+    "end": 9.55
+  },
+  {
+    "text": "of",
+    "start": 9.63,
+    "end": 9.78
+  },
+  {
+    "text": "retail",
+    "start": 9.78,
+    "end": 10.28
+  },
+  {
+    "text": "shareholders",
+    "start": 10.28,
+    "end": 11.28
+  },
+  {
+    "text": "skip",
+    "start": 11.28,
+    "end": 11.61
+  },
+  {
+    "text": "the",
+    "start": 11.61,
+    "end": 11.86
+  },
+  {
+    "text": "vote",
+    "start": 11.86,
+    "end": 12.24
+  },
+  {
+    "text": "because",
+    "start": 12.25,
+    "end": 12.67
+  },
+  {
+    "text": "the",
+    "start": 12.69,
+    "end": 12.88
+  },
+  {
+    "text": "proxy",
+    "start": 12.88,
+    "end": 13.2
+  },
+  {
+    "text": "statement",
+    "start": 13.2,
+    "end": 13.75
+  },
+  {
+    "text": "is",
+    "start": 13.84,
+    "end": 13.92
+  },
+  {
+    "text": "a",
+    "start": 13.92,
+    "end": 13.98
+  },
+  {
+    "text": "hundred",
+    "start": 13.98,
+    "end": 14.43
+  },
+  {
+    "text": "pages",
+    "start": 14.43,
+    "end": 14.8
+  },
+  {
+    "text": "of",
+    "start": 14.8,
+    "end": 14.96
+  },
+  {
+    "text": "legalese.",
+    "start": 15.03,
+    "end": 15.8
+  },
+  {
+    "text": "Robinhood",
+    "start": 15.81,
+    "end": 16.32
+  },
+  {
+    "text": "chain",
+    "start": 16.32,
+    "end": 16.6
+  },
+  {
+    "text": "is",
+    "start": 16.61,
+    "end": 16.72
+  },
+  {
+    "text": "about",
+    "start": 16.72,
+    "end": 17.04
+  },
+  {
+    "text": "to",
+    "start": 17.04,
+    "end": 17.15
+  },
+  {
+    "text": "bring",
+    "start": 17.15,
+    "end": 17.44
+  },
+  {
+    "text": "50",
+    "start": 17.44,
+    "end": 17.62
+  },
+  {
+    "text": "million",
+    "start": 17.86,
+    "end": 18.2
+  },
+  {
+    "text": "retail",
+    "start": 18.2,
+    "end": 18.68
+  },
+  {
+    "text": "investors",
+    "start": 18.68,
+    "end": 19.24
+  },
+  {
+    "text": "on",
+    "start": 19.25,
+    "end": 19.37
+  },
+  {
+    "text": "chain",
+    "start": 19.37,
+    "end": 19.67
+  },
+  {
+    "text": "through",
+    "start": 19.69,
+    "end": 20.14
+  },
+  {
+    "text": "tokenized",
+    "start": 20.14,
+    "end": 20.71
+  },
+  {
+    "text": "stocks.",
+    "start": 20.71,
+    "end": 21.32
+  },
+  {
+    "text": "If",
+    "start": 21.33,
+    "end": 21.5
+  },
+  {
+    "text": "we",
+    "start": 21.5,
+    "end": 21.68
+  },
+  {
+    "text": "do",
+    "start": 21.68,
+    "end": 21.86
+  },
+  {
+    "text": "nothing,",
+    "start": 21.86,
+    "end": 22.52
+  },
+  {
+    "text": "that",
+    "start": 22.53,
+    "end": 22.8
+  },
+  {
+    "text": "participation",
+    "start": 22.8,
+    "end": 23.73
+  },
+  {
+    "text": "gap",
+    "start": 23.73,
+    "end": 23.94
+  },
+  {
+    "text": "is",
+    "start": 23.94,
+    "end": 24.03
+  },
+  {
+    "text": "amplified",
+    "start": 24.11,
+    "end": 24.72
+  },
+  {
+    "text": "1,000",
+    "start": 24.72,
+    "end": 25.71
+  },
+  {
+    "text": "times.",
+    "start": 25.71,
+    "end": 26.1
+  },
+  {
+    "text": "SpeakUp",
+    "start": 26.11,
+    "end": 26.75
+  },
+  {
+    "text": "closes",
+    "start": 26.75,
+    "end": 27.31
+  },
+  {
+    "text": "it",
+    "start": 27.31,
+    "end": 27.52
+  },
+  {
+    "text": "before",
+    "start": 27.52,
+    "end": 27.92
+  },
+  {
+    "text": "it",
+    "start": 28.16,
+    "end": 28.18
+  },
+  {
+    "text": "forms.",
+    "start": 28.18,
+    "end": 28.82
+  },
+  {
+    "text": "This",
+    "start": 28.87,
+    "end": 29.18
+  },
+  {
+    "text": "is",
+    "start": 29.18,
+    "end": 29.34
+  },
+  {
+    "text": "the",
+    "start": 29.34,
+    "end": 29.58
+  },
+  {
+    "text": "live",
+    "start": 29.58,
+    "end": 29.9
+  },
+  {
+    "text": "demo,",
+    "start": 29.9,
+    "end": 30.37
+  },
+  {
+    "text": "running",
+    "start": 30.37,
+    "end": 30.68
+  },
+  {
+    "text": "on",
+    "start": 30.68,
+    "end": 30.92
+  },
+  {
+    "text": "Cloudflare.",
+    "start": 30.92,
+    "end": 31.58
+  },
+  {
+    "text": "The",
+    "start": 31.63,
+    "end": 31.84
+  },
+  {
+    "text": "header",
+    "start": 31.84,
+    "end": 32.29
+  },
+  {
+    "text": "chip",
+    "start": 32.29,
+    "end": 32.59
+  },
+  {
+    "text": "says",
+    "start": 32.59,
+    "end": 32.86
+  },
+  {
+    "text": "demo,",
+    "start": 32.97,
+    "end": 33.2
+  },
+  {
+    "text": "so",
+    "start": 33.21,
+    "end": 33.32
+  },
+  {
+    "text": "you",
+    "start": 33.32,
+    "end": 33.51
+  },
+  {
+    "text": "can",
+    "start": 33.51,
+    "end": 33.7
+  },
+  {
+    "text": "explore",
+    "start": 33.7,
+    "end": 34.15
+  },
+  {
+    "text": "the",
+    "start": 34.15,
+    "end": 34.32
+  },
+  {
+    "text": "whole",
+    "start": 34.36,
+    "end": 34.66
+  },
+  {
+    "text": "flow",
+    "start": 34.66,
+    "end": 34.94
+  },
+  {
+    "text": "without",
+    "start": 34.95,
+    "end": 35.37
+  },
+  {
+    "text": "setting",
+    "start": 35.37,
+    "end": 35.8
+  },
+  {
+    "text": "up",
+    "start": 35.8,
+    "end": 35.92
+  },
+  {
+    "text": "a",
+    "start": 35.92,
+    "end": 35.98
+  },
+  {
+    "text": "wallet.",
+    "start": 35.98,
+    "end": 36.56
+  },
+  {
+    "text": "Three",
+    "start": 36.57,
+    "end": 36.92
+  },
+  {
+    "text": "real",
+    "start": 36.92,
+    "end": 37.21
+  },
+  {
+    "text": "tickers,",
+    "start": 37.21,
+    "end": 37.8
+  },
+  {
+    "text": "Tesla,",
+    "start": 37.89,
+    "end": 38.6
+  },
+  {
+    "text": "Amazon,",
+    "start": 38.62,
+    "end": 39.46
+  },
+  {
+    "text": "Netflix,",
+    "start": 39.53,
+    "end": 40.4
+  },
+  {
+    "text": "each",
+    "start": 40.41,
+    "end": 40.67
+  },
+  {
+    "text": "one",
+    "start": 40.67,
+    "end": 40.87
+  },
+  {
+    "text": "a",
+    "start": 40.87,
+    "end": 40.93
+  },
+  {
+    "text": "livestock",
+    "start": 40.93,
+    "end": 41.51
+  },
+  {
+    "text": "token",
+    "start": 41.56,
+    "end": 41.91
+  },
+  {
+    "text": "on",
+    "start": 42,
+    "end": 42.05
+  },
+  {
+    "text": "Robinhood",
+    "start": 42.05,
+    "end": 42.64
+  },
+  {
+    "text": "chain",
+    "start": 42.64,
+    "end": 42.97
+  },
+  {
+    "text": "testnet.",
+    "start": 42.97,
+    "end": 43.64
+  },
+  {
+    "text": "Open",
+    "start": 43.65,
+    "end": 44.04
+  },
+  {
+    "text": "Tesla,",
+    "start": 44.04,
+    "end": 44.76
+  },
+  {
+    "text": "seven",
+    "start": 44.76,
+    "end": 45.13
+  },
+  {
+    "text": "proposals",
+    "start": 45.13,
+    "end": 45.8
+  },
+  {
+    "text": "up",
+    "start": 45.82,
+    "end": 45.96
+  },
+  {
+    "text": "for",
+    "start": 45.96,
+    "end": 46.14
+  },
+  {
+    "text": "vote",
+    "start": 46.14,
+    "end": 46.36
+  },
+  {
+    "text": "at",
+    "start": 46.39,
+    "end": 46.51
+  },
+  {
+    "text": "the",
+    "start": 46.51,
+    "end": 46.71
+  },
+  {
+    "text": "2025",
+    "start": 46.71,
+    "end": 47.49
+  },
+  {
+    "text": "annual",
+    "start": 47.54,
+    "end": 47.89
+  },
+  {
+    "text": "meeting.",
+    "start": 47.97,
+    "end": 48.62
+  },
+  {
+    "text": "Take",
+    "start": 48.63,
+    "end": 48.99
+  },
+  {
+    "text": "item",
+    "start": 48.99,
+    "end": 49.36
+  },
+  {
+    "text": "one,",
+    "start": 49.36,
+    "end": 49.84
+  },
+  {
+    "text": "the",
+    "start": 49.84,
+    "end": 50.04
+  },
+  {
+    "text": "director's",
+    "start": 50.04,
+    "end": 50.71
+  },
+  {
+    "text": "up",
+    "start": 50.71,
+    "end": 50.84
+  },
+  {
+    "text": "for",
+    "start": 50.84,
+    "end": 51.04
+  },
+  {
+    "text": "reelection.",
+    "start": 51.04,
+    "end": 51.76
+  },
+  {
+    "text": "Management",
+    "start": 51.77,
+    "end": 52.54
+  },
+  {
+    "text": "says",
+    "start": 52.54,
+    "end": 52.85
+  },
+  {
+    "text": "yes.",
+    "start": 52.85,
+    "end": 53.27
+  },
+  {
+    "text": "ISS,",
+    "start": 53.35,
+    "end": 53.77
+  },
+  {
+    "text": "the",
+    "start": 53.77,
+    "end": 54.03
+  },
+  {
+    "text": "largest",
+    "start": 54.03,
+    "end": 54.57
+  },
+  {
+    "text": "independent",
+    "start": 54.69,
+    "end": 55.6
+  },
+  {
+    "text": "proxy",
+    "start": 55.6,
+    "end": 56.03
+  },
+  {
+    "text": "advisor,",
+    "start": 56.03,
+    "end": 56.83
+  },
+  {
+    "text": "says",
+    "start": 56.86,
+    "end": 57.16
+  },
+  {
+    "text": "no.",
+    "start": 57.16,
+    "end": 57.55
+  },
+  {
+    "text": "Glass",
+    "start": 57.61,
+    "end": 57.98
+  },
+  {
+    "text": "Lewis,",
+    "start": 57.98,
+    "end": 58.51
+  },
+  {
+    "text": "the",
+    "start": 58.51,
+    "end": 58.72
+  },
+  {
+    "text": "second",
+    "start": 58.77,
+    "end": 59.11
+  },
+  {
+    "text": "largest,",
+    "start": 59.19,
+    "end": 59.88
+  },
+  {
+    "text": "says",
+    "start": 59.88,
+    "end": 60.29
+  },
+  {
+    "text": "no.",
+    "start": 60.29,
+    "end": 60.82
+  },
+  {
+    "text": "SpeakUp's",
+    "start": 60.83,
+    "end": 61.47
+  },
+  {
+    "text": "advisor",
+    "start": 61.47,
+    "end": 61.93
+  },
+  {
+    "text": "agent",
+    "start": 61.98,
+    "end": 62.33
+  },
+  {
+    "text": "reads",
+    "start": 62.41,
+    "end": 62.64
+  },
+  {
+    "text": "the",
+    "start": 62.88,
+    "end": 62.95
+  },
+  {
+    "text": "full",
+    "start": 62.95,
+    "end": 63.24
+  },
+  {
+    "text": "filing,",
+    "start": 63.24,
+    "end": 63.72
+  },
+  {
+    "text": "weighs",
+    "start": 63.73,
+    "end": 64.09
+  },
+  {
+    "text": "your",
+    "start": 64.09,
+    "end": 64.33
+  },
+  {
+    "text": "stated",
+    "start": 64.34,
+    "end": 64.71
+  },
+  {
+    "text": "preferences",
+    "start": 64.71,
+    "end": 65.4
+  },
+  {
+    "text": "against",
+    "start": 65.4,
+    "end": 65.84
+  },
+  {
+    "text": "both,",
+    "start": 65.84,
+    "end": 66.12
+  },
+  {
+    "text": "and",
+    "start": 66.13,
+    "end": 66.31
+  },
+  {
+    "text": "recommends",
+    "start": 66.31,
+    "end": 66.96
+  },
+  {
+    "text": "against.",
+    "start": 66.96,
+    "end": 67.63
+  },
+  {
+    "text": "High",
+    "start": 67.65,
+    "end": 67.96
+  },
+  {
+    "text": "confidence,",
+    "start": 67.96,
+    "end": 68.88
+  },
+  {
+    "text": "three",
+    "start": 68.98,
+    "end": 69.3
+  },
+  {
+    "text": "lines.",
+    "start": 69.3,
+    "end": 69.96
+  },
+  {
+    "text": "That's",
+    "start": 69.97,
+    "end": 70.3
+  },
+  {
+    "text": "the",
+    "start": 70.3,
+    "end": 70.47
+  },
+  {
+    "text": "whole",
+    "start": 70.47,
+    "end": 70.75
+  },
+  {
+    "text": "decision.",
+    "start": 70.75,
+    "end": 71.42
+  },
+  {
+    "text": "Now",
+    "start": 71.43,
+    "end": 71.7
+  },
+  {
+    "text": "item",
+    "start": 71.7,
+    "end": 72.08
+  },
+  {
+    "text": "two,",
+    "start": 72.08,
+    "end": 72.54
+  },
+  {
+    "text": "the",
+    "start": 72.58,
+    "end": 72.66
+  },
+  {
+    "text": "one",
+    "start": 72.76,
+    "end": 72.94
+  },
+  {
+    "text": "that",
+    "start": 73.02,
+    "end": 73.18
+  },
+  {
+    "text": "matters.",
+    "start": 73.19,
+    "end": 73.84
+  },
+  {
+    "text": "The",
+    "start": 73.85,
+    "end": 74.07
+  },
+  {
+    "text": "$56",
+    "start": 74.07,
+    "end": 74.6
+  },
+  {
+    "text": "billion",
+    "start": 74.6,
+    "end": 75.07
+  },
+  {
+    "text": "Musk",
+    "start": 75.19,
+    "end": 75.45
+  },
+  {
+    "text": "performance",
+    "start": 75.45,
+    "end": 76.3
+  },
+  {
+    "text": "package.",
+    "start": 76.3,
+    "end": 77.12
+  },
+  {
+    "text": "The",
+    "start": 77.13,
+    "end": 77.32
+  },
+  {
+    "text": "Delaware",
+    "start": 77.32,
+    "end": 77.85
+  },
+  {
+    "text": "court",
+    "start": 77.85,
+    "end": 78.18
+  },
+  {
+    "text": "tore",
+    "start": 78.18,
+    "end": 78.36
+  },
+  {
+    "text": "it",
+    "start": 78.46,
+    "end": 78.57
+  },
+  {
+    "text": "up",
+    "start": 78.57,
+    "end": 78.63
+  },
+  {
+    "text": "in",
+    "start": 78.72,
+    "end": 78.82
+  },
+  {
+    "text": "2024.",
+    "start": 78.83,
+    "end": 79.84
+  },
+  {
+    "text": "Now",
+    "start": 79.89,
+    "end": 80.07
+  },
+  {
+    "text": "it's",
+    "start": 80.07,
+    "end": 80.31
+  },
+  {
+    "text": "being",
+    "start": 80.33,
+    "end": 80.66
+  },
+  {
+    "text": "re-voted.",
+    "start": 80.66,
+    "end": 81.39
+  },
+  {
+    "text": "Largest",
+    "start": 81.41,
+    "end": 81.96
+  },
+  {
+    "text": "CEO",
+    "start": 81.96,
+    "end": 82.18
+  },
+  {
+    "text": "compensation",
+    "start": 82.19,
+    "end": 83.16
+  },
+  {
+    "text": "package",
+    "start": 83.17,
+    "end": 83.76
+  },
+  {
+    "text": "in",
+    "start": 83.76,
+    "end": 83.93
+  },
+  {
+    "text": "US",
+    "start": 83.93,
+    "end": 84.1
+  },
+  {
+    "text": "history.",
+    "start": 84.1,
+    "end": 84.96
+  },
+  {
+    "text": "SpeakUp",
+    "start": 84.97,
+    "end": 85.54
+  },
+  {
+    "text": "recommends",
+    "start": 85.54,
+    "end": 86.38
+  },
+  {
+    "text": "against,",
+    "start": 86.38,
+    "end": 87.12
+  },
+  {
+    "text": "ISS",
+    "start": 87.14,
+    "end": 87.37
+  },
+  {
+    "text": "agrees.",
+    "start": 87.37,
+    "end": 88.16
+  },
+  {
+    "text": "Glass",
+    "start": 88.17,
+    "end": 88.53
+  },
+  {
+    "text": "Lewis",
+    "start": 88.53,
+    "end": 88.9
+  },
+  {
+    "text": "agrees.",
+    "start": 88.9,
+    "end": 89.58
+  },
+  {
+    "text": "You",
+    "start": 89.59,
+    "end": 89.8
+  },
+  {
+    "text": "tap",
+    "start": 89.8,
+    "end": 90.01
+  },
+  {
+    "text": "once",
+    "start": 90.03,
+    "end": 90.32
+  },
+  {
+    "text": "and",
+    "start": 90.32,
+    "end": 90.54
+  },
+  {
+    "text": "move",
+    "start": 90.54,
+    "end": 90.82
+  },
+  {
+    "text": "on.",
+    "start": 90.92,
+    "end": 91.24
+  },
+  {
+    "text": "Every",
+    "start": 91.25,
+    "end": 91.53
+  },
+  {
+    "text": "vote",
+    "start": 91.53,
+    "end": 91.76
+  },
+  {
+    "text": "becomes",
+    "start": 91.76,
+    "end": 92.16
+  },
+  {
+    "text": "a",
+    "start": 92.16,
+    "end": 92.21
+  },
+  {
+    "text": "non-chain",
+    "start": 92.21,
+    "end": 92.75
+  },
+  {
+    "text": "attestation",
+    "start": 92.84,
+    "end": 93.44
+  },
+  {
+    "text": "on",
+    "start": 93.45,
+    "end": 93.58
+  },
+  {
+    "text": "Robinhood",
+    "start": 93.58,
+    "end": 94.21
+  },
+  {
+    "text": "chain.",
+    "start": 94.21,
+    "end": 94.79
+  },
+  {
+    "text": "The",
+    "start": 94.81,
+    "end": 95.01
+  },
+  {
+    "text": "registry",
+    "start": 95.01,
+    "end": 95.56
+  },
+  {
+    "text": "contract",
+    "start": 95.56,
+    "end": 96.03
+  },
+  {
+    "text": "is",
+    "start": 96.14,
+    "end": 96.25
+  },
+  {
+    "text": "verified",
+    "start": 96.25,
+    "end": 96.62
+  },
+  {
+    "text": "on",
+    "start": 96.86,
+    "end": 96.94
+  },
+  {
+    "text": "BlockScout.",
+    "start": 96.94,
+    "end": 97.87
+  },
+  {
+    "text": "Eight",
+    "start": 97.89,
+    "end": 98.19
+  },
+  {
+    "text": "transaction",
+    "start": 98.19,
+    "end": 98.88
+  },
+  {
+    "text": "hashes",
+    "start": 98.88,
+    "end": 99.11
+  },
+  {
+    "text": "are",
+    "start": 99.24,
+    "end": 99.39
+  },
+  {
+    "text": "documented",
+    "start": 99.48,
+    "end": 100.08
+  },
+  {
+    "text": "in",
+    "start": 100.08,
+    "end": 100.27
+  },
+  {
+    "text": "the",
+    "start": 100.27,
+    "end": 100.55
+  },
+  {
+    "text": "repo,",
+    "start": 100.55,
+    "end": 100.94
+  },
+  {
+    "text": "proving",
+    "start": 100.95,
+    "end": 101.36
+  },
+  {
+    "text": "the",
+    "start": 101.36,
+    "end": 101.54
+  },
+  {
+    "text": "full",
+    "start": 101.54,
+    "end": 101.78
+  },
+  {
+    "text": "deploy",
+    "start": 101.78,
+    "end": 102.14
+  },
+  {
+    "text": "plus",
+    "start": 102.14,
+    "end": 102.38
+  },
+  {
+    "text": "vote",
+    "start": 102.38,
+    "end": 102.64
+  },
+  {
+    "text": "plus",
+    "start": 102.64,
+    "end": 102.76
+  },
+  {
+    "text": "acknowledge",
+    "start": 103,
+    "end": 103.66
+  },
+  {
+    "text": "cycle.",
+    "start": 103.66,
+    "end": 104.22
+  },
+  {
+    "text": "One",
+    "start": 104.23,
+    "end": 104.42
+  },
+  {
+    "text": "signature",
+    "start": 104.42,
+    "end": 105
+  },
+  {
+    "text": "records",
+    "start": 105.01,
+    "end": 105.46
+  },
+  {
+    "text": "all",
+    "start": 105.56,
+    "end": 105.68
+  },
+  {
+    "text": "your",
+    "start": 105.68,
+    "end": 105.94
+  },
+  {
+    "text": "decisions.",
+    "start": 105.94,
+    "end": 106.76
+  },
+  {
+    "text": "A",
+    "start": 106.77,
+    "end": 106.82
+  },
+  {
+    "text": "mock",
+    "start": 106.82,
+    "end": 107.07
+  },
+  {
+    "text": "relayer",
+    "start": 107.07,
+    "end": 107.49
+  },
+  {
+    "text": "bridges",
+    "start": 107.49,
+    "end": 107.88
+  },
+  {
+    "text": "to",
+    "start": 107.92,
+    "end": 108
+  },
+  {
+    "text": "broadridge",
+    "start": 108.11,
+    "end": 108.58
+  },
+  {
+    "text": "in",
+    "start": 108.58,
+    "end": 108.82
+  },
+  {
+    "text": "production.",
+    "start": 108.82,
+    "end": 109.64
+  },
+  {
+    "text": "Three",
+    "start": 109.65,
+    "end": 109.97
+  },
+  {
+    "text": "things",
+    "start": 109.97,
+    "end": 110.37
+  },
+  {
+    "text": "we",
+    "start": 110.37,
+    "end": 110.5
+  },
+  {
+    "text": "want",
+    "start": 110.5,
+    "end": 110.76
+  },
+  {
+    "text": "judges",
+    "start": 110.8,
+    "end": 111.15
+  },
+  {
+    "text": "to",
+    "start": 111.24,
+    "end": 111.3
+  },
+  {
+    "text": "take",
+    "start": 111.3,
+    "end": 111.46
+  },
+  {
+    "text": "away.",
+    "start": 111.7,
+    "end": 112.08
+  },
+  {
+    "text": "One,",
+    "start": 112.09,
+    "end": 112.47
+  },
+  {
+    "text": "we",
+    "start": 112.47,
+    "end": 112.63
+  },
+  {
+    "text": "built",
+    "start": 112.63,
+    "end": 113.03
+  },
+  {
+    "text": "directly",
+    "start": 113.03,
+    "end": 113.59
+  },
+  {
+    "text": "on",
+    "start": 113.67,
+    "end": 113.82
+  },
+  {
+    "text": "Robinhood",
+    "start": 113.82,
+    "end": 114.53
+  },
+  {
+    "text": "chain",
+    "start": 114.53,
+    "end": 114.96
+  },
+  {
+    "text": "with",
+    "start": 114.97,
+    "end": 115.22
+  },
+  {
+    "text": "their",
+    "start": 115.22,
+    "end": 115.54
+  },
+  {
+    "text": "native",
+    "start": 115.54,
+    "end": 115.93
+  },
+  {
+    "text": "stock",
+    "start": 115.93,
+    "end": 116.2
+  },
+  {
+    "text": "tokens,",
+    "start": 116.31,
+    "end": 116.78
+  },
+  {
+    "text": "not",
+    "start": 116.78,
+    "end": 117.02
+  },
+  {
+    "text": "a",
+    "start": 117.02,
+    "end": 117.09
+  },
+  {
+    "text": "wrapper.",
+    "start": 117.09,
+    "end": 117.84
+  },
+  {
+    "text": "Two,",
+    "start": 117.85,
+    "end": 118.17
+  },
+  {
+    "text": "the",
+    "start": 118.17,
+    "end": 118.37
+  },
+  {
+    "text": "product",
+    "start": 118.37,
+    "end": 118.85
+  },
+  {
+    "text": "is",
+    "start": 118.85,
+    "end": 118.96
+  },
+  {
+    "text": "three",
+    "start": 119,
+    "end": 119.32
+  },
+  {
+    "text": "specialized",
+    "start": 119.32,
+    "end": 120.12
+  },
+  {
+    "text": "anthropic",
+    "start": 120.12,
+    "end": 120.91
+  },
+  {
+    "text": "agents,",
+    "start": 120.95,
+    "end": 121.48
+  },
+  {
+    "text": "reader,",
+    "start": 121.49,
+    "end": 122.17
+  },
+  {
+    "text": "advisor,",
+    "start": 122.17,
+    "end": 122.95
+  },
+  {
+    "text": "executor,",
+    "start": 122.95,
+    "end": 123.84
+  },
+  {
+    "text": "the",
+    "start": 123.84,
+    "end": 124.08
+  },
+  {
+    "text": "core,",
+    "start": 124.08,
+    "end": 124.55
+  },
+  {
+    "text": "not",
+    "start": 124.58,
+    "end": 124.82
+  },
+  {
+    "text": "a",
+    "start": 124.82,
+    "end": 124.9
+  },
+  {
+    "text": "sidecar.",
+    "start": 124.9,
+    "end": 125.78
+  },
+  {
+    "text": "Three,",
+    "start": 125.79,
+    "end": 126.25
+  },
+  {
+    "text": "tokenized",
+    "start": 126.25,
+    "end": 126.86
+  },
+  {
+    "text": "equity",
+    "start": 126.86,
+    "end": 127.27
+  },
+  {
+    "text": "governance",
+    "start": 127.27,
+    "end": 127.98
+  },
+  {
+    "text": "is",
+    "start": 127.99,
+    "end": 128.09
+  },
+  {
+    "text": "the",
+    "start": 128.09,
+    "end": 128.25
+  },
+  {
+    "text": "unwritten",
+    "start": 128.25,
+    "end": 128.74
+  },
+  {
+    "text": "chapter",
+    "start": 128.74,
+    "end": 129.16
+  },
+  {
+    "text": "in",
+    "start": 129.16,
+    "end": 129.22
+  },
+  {
+    "text": "Robinhood",
+    "start": 129.33,
+    "end": 129.8
+  },
+  {
+    "text": "chain's",
+    "start": 130.04,
+    "end": 130.27
+  },
+  {
+    "text": "own",
+    "start": 130.27,
+    "end": 130.46
+  },
+  {
+    "text": "roadmap.",
+    "start": 130.46,
+    "end": 131.12
+  },
+  {
+    "text": "There",
+    "start": 131.13,
+    "end": 131.42
+  },
+  {
+    "text": "is",
+    "start": 131.42,
+    "end": 131.54
+  },
+  {
+    "text": "no",
+    "start": 131.54,
+    "end": 131.66
+  },
+  {
+    "text": "incumbent.",
+    "start": 131.66,
+    "end": 132.36
+  },
+  {
+    "text": "SpeakUp",
+    "start": 132.41,
+    "end": 132.86
+  },
+  {
+    "text": "is",
+    "start": 132.86,
+    "end": 132.99
+  },
+  {
+    "text": "competing",
+    "start": 132.99,
+    "end": 133.62
+  },
+  {
+    "text": "for",
+    "start": 133.62,
+    "end": 133.82
+  },
+  {
+    "text": "the",
+    "start": 133.82,
+    "end": 134.02
+  },
+  {
+    "text": "Robinhood",
+    "start": 134.02,
+    "end": 134.62
+  },
+  {
+    "text": "overall",
+    "start": 134.62,
+    "end": 135.09
+  },
+  {
+    "text": "slot,",
+    "start": 135.09,
+    "end": 135.52
+  },
+  {
+    "text": "best",
+    "start": 135.53,
+    "end": 135.87
+  },
+  {
+    "text": "agentic",
+    "start": 135.87,
+    "end": 136.48
+  },
+  {
+    "text": "project,",
+    "start": 136.48,
+    "end": 137.22
+  },
+  {
+    "text": "and",
+    "start": 137.22,
+    "end": 137.34
+  },
+  {
+    "text": "a",
+    "start": 137.34,
+    "end": 137.58
+  },
+  {
+    "text": "seat",
+    "start": 137.58,
+    "end": 137.64
+  },
+  {
+    "text": "at",
+    "start": 137.64,
+    "end": 137.74
+  },
+  {
+    "text": "Founder",
+    "start": 137.74,
+    "end": 138.24
+  },
+  {
+    "text": "House",
+    "start": 138.31,
+    "end": 138.63
+  },
+  {
+    "text": "London,",
+    "start": 138.63,
+    "end": 139.08
+  },
+  {
+    "text": "code",
+    "start": 139.09,
+    "end": 139.49
+  },
+  {
+    "text": "on",
+    "start": 139.49,
+    "end": 139.69
+  },
+  {
+    "text": "GitHub",
+    "start": 139.69,
+    "end": 140.31
+  },
+  {
+    "text": "at",
+    "start": 140.31,
+    "end": 140.51
+  },
+  {
+    "text": "iwbinb",
+    "start": 140.51,
+    "end": 141.12
+  },
+  {
+    "text": "slash",
+    "start": 141.14,
+    "end": 141.63
+  },
+  {
+    "text": "SpeakUp,",
+    "start": 141.63,
+    "end": 142.4
+  },
+  {
+    "text": "live",
+    "start": 142.41,
+    "end": 142.7
+  },
+  {
+    "text": "at",
+    "start": 142.7,
+    "end": 142.83
+  },
+  {
+    "text": "SpeakUp.vote,",
+    "start": 142.85,
+    "end": 144.1
+  },
+  {
+    "text": "give",
+    "start": 144.11,
+    "end": 144.35
+  },
+  {
+    "text": "every",
+    "start": 144.35,
+    "end": 144.66
+  },
+  {
+    "text": "on-chain",
+    "start": 144.66,
+    "end": 145.15
+  },
+  {
+    "text": "shareholder",
+    "start": 145.15,
+    "end": 145.84
+  },
+  {
+    "text": "a",
+    "start": 145.84,
+    "end": 145.89
+  },
+  {
+    "text": "voice.",
+    "start": 145.9,
+    "end": 146.44
+  },
+  {
+    "text": "Thank",
+    "start": 146.45,
+    "end": 146.82
+  },
+  {
+    "text": "you.",
+    "start": 146.82,
+    "end": 147.28
+  }
+]

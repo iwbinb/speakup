@@ -1,0 +1,29 @@
+[span] SpeakUp
+[span] Give every on-chain shareholder a voice
+[span] Robinhood Chain Testnet
+[span] 0x14d0…1351
+[span] demo
+[h2] Your demo holdings
+[p] proposals waiting for your vote across
+[p] companies
+[span] Robinhood Chain Testnet
+[p] Tesla
+[span] TSLA
+[p] Musk $56B comp package re-vote
+[p] TSLA
+[a] proposals
+[p] Amazon
+[span] AMZN
+[p] Antitrust, AWS spin-off proposals
+[p] AMZN
+[a] proposals
+[p] Netflix
+[span] NFLX
+[p] Content ESG, executive comp
+[p] NFLX
+[a] proposals
+[p] Plain-English shareholder voting on Robinhood Chain. Every on-chain shareholder gets a voice.
+[p] SpeakUp · MIT licence
+[a] Holdings
+[p] Not investment advice. Stylized brand marks used for identification only; SpeakUp is not affiliated with Tesla, Amazon, Netflix, or Robinhood.
+[p] anywhere
