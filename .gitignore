@@ -60,3 +60,4 @@ tmp/
 
 # Tooling local config
 .claude/
+video/renders/
