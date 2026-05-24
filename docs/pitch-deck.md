@@ -6,7 +6,7 @@ size: 16:9
 backgroundColor: '#ffffff'
 color: '#1a1d21'
 header: 'SpeakUp · AI Copilot for on-chain shareholder governance'
-footer: 'NodeStake · Arbitrum Open House London Buildathon · 2026-06'
+footer: 'SpeakUp · Arbitrum Open House London Buildathon · 2026-06'
 style: |
   section {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
@@ -160,9 +160,9 @@ We are the first to fuse **public-company proxy voting + on-chain attestation + 
 
 ## Team
 
-**Bill Wu** · CEO, NodeStake (California-based validator infrastructure)
+**Bill Wu** · solo founder
 
-- Validator across **Cosmos Hub, Celestia, Monad, Starknet, Gno.land, TRUF.NETWORK, TAC**
+- Long-time validator operator across **Cosmos Hub, Celestia, Monad, Starknet, Gno.land, TRUF.NETWORK, TAC**
 - Multi-cloud + bare-metal infrastructure (Caddy + systemd)
 - Deep on-chain governance experience: votes professionally on every major Cosmos and Arbitrum DAO proposal
 - Building SpeakUp solo + Claude collaboration
@@ -189,6 +189,6 @@ We are competing for:
 
 **Demo**: speakup.vote
 **Code**: github.com/iwbinb/speakup
-**Reach**: bill@nodestake.org · @iwbinb on Telegram
+**Reach**: iwbinb@gmail.com · @iwbinb on Telegram
 
 > Give every on-chain shareholder a voice.

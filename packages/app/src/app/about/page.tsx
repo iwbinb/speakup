@@ -126,6 +126,42 @@ export default function AboutPage() {
           </p>
         </Section>
 
+        <Section title="Under the hood">
+          <p>
+            SpeakUp records every vote as an on-chain attestation in a
+            single Solidity contract called{' '}
+            <code className="bg-ink-100 px-1.5 py-0.5 rounded text-xs">
+              SpeakUpRegistry
+            </code>
+            . It is live on Robinhood Chain testnet (chain id 46630) at{' '}
+            <a
+              className="underline font-mono text-xs"
+              href="https://explorer.testnet.chain.robinhood.com/address/0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94"
+              target="_blank"
+              rel="noreferrer"
+            >
+              0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94
+            </a>{' '}
+            and Blockscout-verified.
+          </p>
+          <p className="mt-3">
+            Each vote produces a deterministic{' '}
+            <code className="bg-ink-100 px-1.5 py-0.5 rounded text-xs">
+              VoteAttestation
+            </code>{' '}
+            with the voter address, meeting id, item id, choice, weight (read
+            from the underlying ERC-20 at cast time), and a reasoning hash
+            that can pin the AI rationale to IPFS for full auditability.
+            Smart-contract test coverage is 100% lines / 100% functions,
+            slither scan returns 0 High / 0 Medium findings, and the full
+            8-tx end-to-end run is documented in the repo&apos;s{' '}
+            <code className="bg-ink-100 px-1.5 py-0.5 rounded text-xs">
+              docs/e2e-proof.md
+            </code>
+            .
+          </p>
+        </Section>
+
         <Section title="Built for the Arbitrum Open House London Buildathon">
           <p>
             SpeakUp is an open-source submission to the{' '}

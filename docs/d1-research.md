@@ -157,7 +157,7 @@ dTSLA (Dinari) + bCSPX (Backed) + dAAPL (Dinari)
 ## 6. 仍需用户决策
 
 - Demo 标的三选最终敲定：默认 TSLA + AMZN + NFLX，如想换成含 PLTR / AMD 请说
-- Alchemy API key（D5 前）：用 NodeStake 现有账号或新申请
-- Anthropic API key（D5 前）：用 NodeStake 现有账号
+- Alchemy API key（D5 前）：新申请或复用现有
+- Anthropic API key（D5 前）：复用现有账号
 - Privy app id（D10 前）：免费档够用
 - speakup.vote 域名注册（D20 前）：约 $30/年

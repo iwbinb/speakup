@@ -83,7 +83,7 @@ Claude Sonnet 4.6 ([Anthropic release notes][sonnet-4-6]) reliably summarises 10
 1. **Distribution wedge inside Arbitrum + Robinhood ecosystem**, won during this hackathon.
 2. **On-chain attestation graph**: every vote we record becomes part of a public attestation graph (the Envio HyperIndex). The longer SpeakUp runs, the more this graph compounds into a unique dataset for governance research.
 3. **Reasoning-hash field on every vote**: the link from AI rationale to on-chain action is content-addressable; future delegation networks can be built on top.
-4. **NodeStake operator credibility**: SpeakUp is built by a professional validator with deep DAO-governance reputation in Cosmos and Arbitrum. We can vouch for our own attestations; a generic founder cannot.
+4. **solo-founder operator credibility**: SpeakUp is built by a professional validator with deep DAO-governance reputation in Cosmos and Arbitrum. We can vouch for our own attestations; a generic founder cannot.
 
 ---
 
@@ -116,7 +116,7 @@ Each of these is in the production-onepager hand-off checklist; the indexer scaf
 - 1 founding FE engineer (Next.js + viem + design taste)
 - 1 BD lead for tokenized-equity issuer partnerships (background: investor relations, capital markets, or Broadridge / Mediant veteran)
 
-Contact: bill@nodestake.org
+Contact: iwbinb@gmail.com
 
 ---
 

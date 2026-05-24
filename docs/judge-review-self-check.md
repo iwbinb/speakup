@@ -47,7 +47,7 @@ Last updated 2026-05-24.
 | Compliance pathway | `docs/compliance-posture.md` traces Rule 14a-1 / 14a-2(b)(9) safe harbor, Broadridge / Mediant bridge plan, KYC delegation to issuer, state-level proxy rules (DGCL §211, TBOC §6.252) |
 | Existing competition | Head-to-head matrix in `docs/pmf-and-market.md`: Robinhood default proxy notice, BlackRock Voting Choice, Tally / Boardroom / Aragon, Dinari / Backed / Spout. Honest gap analysis. |
 | Pricing model | Phase 1 free for retail; revenue from issuer subscription at $0.10-$0.50 / ballot (Say.com precedent). Phase 2 premium tier for HNW + family offices. |
-| Defensibility | On-chain attestation graph compounds; reasoning-hash field enables delegation primitives others can build on; NodeStake operator credibility |
+| Defensibility | On-chain attestation graph compounds; reasoning-hash field enables delegation primitives others can build on; solo-founder operator credibility (multi-year validator + active governance participation across Cosmos and Arbitrum DAOs) |
 
 **Score self-estimate: 5 / 5.** Fully documented TAM, regulatory pathway, competition matrix, and pricing model. The remaining gap (LOIs from issuers, validated WTP) is not addressable in a hackathon timeframe but is explicit in the production roadmap.
 
