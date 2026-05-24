@@ -3,10 +3,16 @@
 import { useState } from 'react';
 
 import { useAuth, type AuthMode } from '../lib/auth';
+import { useActiveChain } from '../lib/chain-context';
+import type { SupportedChainId } from '../lib/chains';
 
 export function Header() {
   const auth = useAuth();
+  const chain = useActiveChain();
   const [showSwitcher, setShowSwitcher] = useState(false);
+  const [showChainMenu, setShowChainMenu] = useState(false);
+
+  const activeChain = chain.chains.find((c) => c.id === chain.activeChainId);
 
   return (
     <header className="border-b border-ink-200 bg-white relative">
@@ -21,32 +27,55 @@ export function Header() {
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 relative">
+          {/* Chain selector */}
+          <button
+            type="button"
+            className="flex items-center gap-1.5 text-xs text-ink-700 hover:bg-ink-100 rounded-full px-3 py-1.5 transition border border-ink-200"
+            onClick={() => {
+              setShowChainMenu((s) => !s);
+              setShowSwitcher(false);
+            }}
+            title="Switch chain"
+          >
+            <span className="w-1.5 h-1.5 bg-brand rounded-full" />
+            <span className="font-medium">
+              {activeChain?.name ?? `Chain ${chain.activeChainId}`}
+            </span>
+            <svg width="10" height="10" viewBox="0 0 12 12" className="opacity-60">
+              <path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </button>
+
+          {showChainMenu && (
+            <ChainMenu
+              activeId={chain.activeChainId}
+              chains={chain.chains}
+              onPick={(id) => {
+                chain.setActiveChainId(id);
+                setShowChainMenu(false);
+              }}
+              onClose={() => setShowChainMenu(false)}
+            />
+          )}
+
+          {/* Identity */}
           {auth.address ? (
-            <>
-              <button
-                type="button"
-                className="flex items-center gap-2 text-sm text-ink-700 hover:bg-ink-100 rounded-full px-3 py-1.5 transition"
-                onClick={() => setShowSwitcher((s) => !s)}
-                title="Switch identity"
-              >
-                <span className="font-mono">{shortAddr(auth.address)}</span>
-                <ModePill mode={auth.mode} />
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  className="opacity-60"
-                >
-                  <path
-                    d="M3 4.5l3 3 3-3"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </button>
-            </>
+            <button
+              type="button"
+              className="flex items-center gap-2 text-sm text-ink-700 hover:bg-ink-100 rounded-full px-3 py-1.5 transition"
+              onClick={() => {
+                setShowSwitcher((s) => !s);
+                setShowChainMenu(false);
+              }}
+              title="Switch identity"
+            >
+              <span className="font-mono">{shortAddr(auth.address)}</span>
+              <ModePill mode={auth.mode} />
+              <svg width="12" height="12" viewBox="0 0 12 12" className="opacity-60">
+                <path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </button>
           ) : (
             <button
               className="btn-primary"
@@ -58,26 +87,56 @@ export function Header() {
         </div>
       </div>
 
-      {showSwitcher && (
-        <IdentitySwitcher
-          onClose={() => setShowSwitcher(false)}
-        />
-      )}
+      {showSwitcher && <IdentitySwitcher onClose={() => setShowSwitcher(false)} />}
     </header>
+  );
+}
+
+function ChainMenu({
+  activeId,
+  chains,
+  onPick,
+  onClose,
+}: {
+  activeId: SupportedChainId;
+  chains: readonly { id: number; name: string }[];
+  onPick: (id: SupportedChainId) => void;
+  onClose: () => void;
+}) {
+  return (
+    <>
+      <div className="fixed inset-0 z-40" onClick={onClose} />
+      <div className="absolute right-[120px] top-full mt-2 z-50 w-[240px] card shadow-xl p-2">
+        <p className="text-[10px] uppercase tracking-wide text-ink-500 px-2 py-1">
+          Active chain
+        </p>
+        {chains.map((c) => (
+          <button
+            key={c.id}
+            type="button"
+            onClick={() => onPick(c.id as SupportedChainId)}
+            className={`w-full text-left px-3 py-2 rounded text-sm transition ${
+              c.id === activeId
+                ? 'bg-brand/10 text-brand-dark font-medium'
+                : 'hover:bg-ink-100 text-ink-700'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span>{c.name}</span>
+              <span className="text-xs text-ink-400">id {c.id}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
 
 function ModePill({ mode }: { mode: AuthMode }) {
   const label =
-    mode === 'demo'
-      ? 'demo'
-      : mode === 'watch'
-        ? 'watching'
-        : 'connected';
+    mode === 'demo' ? 'demo' : mode === 'watch' ? 'watching' : 'connected';
   const cls =
-    mode === 'wallet'
-      ? 'bg-brand text-white'
-      : 'bg-ink-100 text-ink-700';
+    mode === 'wallet' ? 'bg-brand text-white' : 'bg-ink-100 text-ink-700';
   return (
     <span
       className={`text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full ${cls}`}
@@ -89,16 +148,11 @@ function ModePill({ mode }: { mode: AuthMode }) {
 
 function IdentitySwitcher({ onClose }: { onClose: () => void }) {
   const auth = useAuth();
-  const [watchInput, setWatchInput] = useState<string>(
-    auth.watchAddress ?? '',
-  );
+  const [watchInput, setWatchInput] = useState<string>(auth.watchAddress ?? '');
 
   return (
     <>
-      <div
-        className="fixed inset-0 bg-black/30 z-40"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-black/30 z-40" onClick={onClose} />
       <div className="absolute right-6 top-full mt-2 z-50 w-[360px] card shadow-xl">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold">Switch identity</h3>

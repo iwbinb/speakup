@@ -9,8 +9,10 @@ import {
   type ReactNode,
 } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
 import { isAddress } from 'viem';
+
+import { useActiveChain } from './chain-context';
 
 /**
  * Demo wallet address. Used in demo mode (when NEXT_PUBLIC_PRIVY_APP_ID is
@@ -54,9 +56,11 @@ const LS_MODE = 'speakup.authMode';
 const LS_WATCH = 'speakup.watchAddress';
 
 export function DemoAuthProvider({ children }: { children: ReactNode }) {
-  const { address: walletAddress, isConnected, status } = useAccount();
+  const { address: walletAddress, isConnected, chainId, status } = useAccount();
   const { connectAsync, connectors } = useConnect();
   const { disconnect: wagmiDisconnect } = useDisconnect();
+  const { switchChainAsync } = useSwitchChain();
+  const { activeChainId } = useActiveChain();
 
   const [mode, setModeRaw] = useState<AuthMode>('demo');
   const [watchAddress, setWatchRaw] = useState<`0x${string}` | undefined>(
@@ -112,12 +116,31 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
       return;
     }
     try {
-      await connectAsync({ connector: injected });
+      await connectAsync({ connector: injected, chainId: activeChainId });
       persistMode('wallet');
     } catch (e) {
       console.error('connect failed', e);
     }
   }, [connectAsync, connectors, persistMode]);
+
+  /**
+   * Prompt the wallet to switch to the active app chain when the user is in
+   * wallet mode but connected to the wrong network (common when judges
+   * arrive with MetaMask defaulted to Ethereum mainnet).
+   */
+  const ensureChain = useCallback(async () => {
+    if (mode !== 'wallet' || !isConnected) return;
+    if (chainId === activeChainId) return;
+    try {
+      await switchChainAsync({ chainId: activeChainId });
+    } catch (e) {
+      console.warn('chain switch rejected', e);
+    }
+  }, [chainId, isConnected, mode, switchChainAsync]);
+
+  useEffect(() => {
+    ensureChain();
+  }, [ensureChain]);
 
   const disconnect = useCallback(() => {
     if (isConnected) wagmiDisconnect();

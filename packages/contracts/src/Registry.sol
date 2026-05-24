@@ -172,6 +172,9 @@ contract SpeakUpRegistry {
         Meeting storage m = meetings[meetingId];
         if (m.ticker == bytes32(0)) revert MeetingNotFound();
         if (!m.active) revert MeetingClosedAlready();
+        // Voting windows are measured in days; the ~15s validator timestamp
+        // drift is irrelevant for this comparison.
+        // forge-lint: disable-next-line(block-timestamp)
         if (block.timestamp < m.voteOpen || block.timestamp > m.voteDeadline) {
             revert MeetingNotOpen();
         }

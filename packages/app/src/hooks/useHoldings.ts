@@ -4,10 +4,10 @@ import { useReadContracts } from 'wagmi';
 import { formatUnits, parseUnits } from 'viem';
 import type { Address } from 'viem';
 
-import { DEFAULT_CHAIN_ID } from '../lib/chains';
 import { ERC20_ABI } from '../lib/erc20';
 import { TICKERS } from '../lib/tickers';
 import { useAuth } from '../lib/auth';
+import { useActiveChain } from '../lib/chain-context';
 
 export type Holding = {
   symbol: string;
@@ -27,10 +27,11 @@ const DEMO_BALANCES: Record<string, string> = {
 
 export function useHoldings(account: Address | undefined) {
   const { mode } = useAuth();
+  const { activeChainId } = useActiveChain();
   const isDemoIdentity = mode === 'demo';
 
   const calls = TICKERS.flatMap((t) => {
-    const addr = t.addresses[DEFAULT_CHAIN_ID];
+    const addr = t.addresses[activeChainId];
     if (!addr) return [];
     return [
       {
@@ -38,7 +39,7 @@ export function useHoldings(account: Address | undefined) {
         abi: ERC20_ABI,
         functionName: 'balanceOf' as const,
         args: [account ?? '0x0000000000000000000000000000000000000000'],
-        chainId: DEFAULT_CHAIN_ID,
+        chainId: activeChainId,
       },
     ];
   });
@@ -54,7 +55,7 @@ export function useHoldings(account: Address | undefined) {
   // claiming faucet tokens. Watch + wallet modes always hit the RPC.
   if (isDemoIdentity && account) {
     for (const t of TICKERS) {
-      const addr = t.addresses[DEFAULT_CHAIN_ID];
+      const addr = t.addresses[activeChainId];
       if (!addr) continue;
       const amount = DEMO_BALANCES[t.symbol] ?? '0';
       const balance = parseUnits(amount, 18);
@@ -74,7 +75,7 @@ export function useHoldings(account: Address | undefined) {
   if (data && account) {
     let i = 0;
     for (const t of TICKERS) {
-      const addr = t.addresses[DEFAULT_CHAIN_ID];
+      const addr = t.addresses[activeChainId];
       if (!addr) continue;
       const res = data[i++];
       const balance = res?.status === 'success' ? (res.result as bigint) : 0n;

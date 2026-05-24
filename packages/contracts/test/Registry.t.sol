@@ -77,6 +77,8 @@ contract RegistryTest is Test {
 
     function test_HappyPath_CastVote() public {
         vm.prank(alice);
+        // Test fixture only; truncation acceptable.
+        // forge-lint: disable-next-line(unsafe-typecast)
         bytes32 uid = registry.castVote(TSLA_MEETING_1, 2, SpeakUpRegistry.Choice.AGAINST, bytes32("ipfs://x"));
 
         (

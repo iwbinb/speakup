@@ -14,7 +14,12 @@
     "typecheck": "bun run --filter '*' typecheck",
     "dev": "bun run --filter './packages/app' dev",
     "agent": "bun run --filter './packages/agent' start",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,sol}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,sol}\"",
+    "deploy:robinhood": "cd packages/contracts && ROBINHOOD_RPC_URL=${ROBINHOOD_RPC_URL:-https://rpc.testnet.chain.robinhood.com} forge script script/Deploy.s.sol --rpc-url robinhood_testnet --broadcast --verify",
+    "deploy:sepolia": "cd packages/contracts && ARBITRUM_SEPOLIA_RPC_URL=${ARBITRUM_SEPOLIA_RPC_URL:-https://sepolia-rollup.arbitrum.io/rpc} forge script script/Deploy.s.sol --rpc-url arbitrum_sepolia --broadcast",
+    "bootstrap:robinhood": "cd packages/contracts && ROBINHOOD_RPC_URL=${ROBINHOOD_RPC_URL:-https://rpc.testnet.chain.robinhood.com} forge script script/Bootstrap.s.sol --rpc-url robinhood_testnet --broadcast",
+    "relayer:robinhood": "cd packages/agent && ROBINHOOD_RPC_URL=${ROBINHOOD_RPC_URL:-https://rpc.testnet.chain.robinhood.com} ROBINHOOD_CHAIN_ID=46630 bun run scripts/mock-relayer.ts",
+    "test:smoke": "cd packages/app && bun test"
   },
   "devDependencies": {
     "prettier": "^3.3.3",

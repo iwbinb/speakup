@@ -9,9 +9,9 @@ import { Header } from '../../../components/Header';
 import { ProposalCard } from '../../../components/ProposalCard';
 import { useMeetings } from '../../../hooks/useMeetings';
 import { useAuth } from '../../../lib/auth';
-import { DEFAULT_CHAIN_ID } from '../../../lib/chains';
+import { useActiveChain } from '../../../lib/chain-context';
 import { CHOICE_LABEL, REGISTRY_ABI, REGISTRY_ADDRESS, choiceToIdx } from '../../../lib/registry';
-import type { Choice, ProposalList, RecommendationList } from '@speakup/agent';
+import type { Choice, ProposalList, RecommendationList } from '@speakup/agent/types';
 
 type Decisions = Record<number, Choice>;
 
@@ -19,6 +19,7 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
   const { meetingId } = use(params);
   const meeting = useMeetings().find((m) => m.id === meetingId);
   const { ready, authenticated, canSign, mode } = useAuth();
+  const { activeChainId } = useActiveChain();
   const [proposals, setProposals] = useState<ProposalList | null>(null);
   const [recs, setRecs] = useState<RecommendationList | null>(null);
   const [decisions, setDecisions] = useState<Decisions>({});
@@ -87,7 +88,7 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
       );
       return;
     }
-    const registryAddr = REGISTRY_ADDRESS[DEFAULT_CHAIN_ID];
+    const registryAddr = REGISTRY_ADDRESS[activeChainId];
     if (!registryAddr || registryAddr === '0x0000000000000000000000000000000000000000') {
       setError('Registry not deployed on this chain yet.');
       return;
@@ -113,7 +114,7 @@ export default function MeetingPage({ params }: { params: Promise<{ meetingId: s
         abi: REGISTRY_ABI,
         functionName: 'castVotes',
         args: [meetingIdBytes, itemIds, choices, reasoningHashes],
-        chainId: DEFAULT_CHAIN_ID,
+        chainId: activeChainId,
       });
       setTxHash(hash);
     } catch (e) {

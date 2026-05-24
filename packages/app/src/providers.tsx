@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import { wagmiConfig } from './lib/wagmi';
 import { robinhoodTestnet } from './lib/chains';
+import { ChainProvider } from './lib/chain-context';
 import { DemoAuthProvider, RealAuthProvider, isDemoMode } from './lib/auth';
 
 const PRIVY_APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? '';
@@ -20,10 +21,12 @@ export function Providers({ children }: { children: ReactNode }) {
     return (
       <QueryClientProvider client={queryClient}>
         <PlainWagmiProvider config={wagmiConfig}>
-          <DemoAuthProvider>
-            <DemoBanner />
-            {children}
-          </DemoAuthProvider>
+          <ChainProvider>
+            <DemoAuthProvider>
+              <DemoBanner />
+              {children}
+            </DemoAuthProvider>
+          </ChainProvider>
         </PlainWagmiProvider>
       </QueryClientProvider>
     );
@@ -49,7 +52,9 @@ export function Providers({ children }: { children: ReactNode }) {
     >
       <QueryClientProvider client={queryClient}>
         <PrivyWagmiProvider config={wagmiConfig}>
-          <RealAuthProvider>{children}</RealAuthProvider>
+          <ChainProvider>
+            <RealAuthProvider>{children}</RealAuthProvider>
+          </ChainProvider>
         </PrivyWagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
