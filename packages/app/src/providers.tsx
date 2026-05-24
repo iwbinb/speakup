@@ -22,10 +22,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <PlainWagmiProvider config={wagmiConfig}>
           <ChainProvider>
-            <DemoAuthProvider>
-              <DemoBanner />
-              {children}
-            </DemoAuthProvider>
+            <DemoAuthProvider>{children}</DemoAuthProvider>
           </ChainProvider>
         </PlainWagmiProvider>
       </QueryClientProvider>
@@ -61,14 +58,3 @@ export function Providers({ children }: { children: ReactNode }) {
   );
 }
 
-function DemoBanner() {
-  return (
-    <div className="bg-ink-900 text-white text-xs px-4 py-2 text-center">
-      Demo mode · read-only preview with a mock wallet. Set
-      <code className="mx-1.5 px-1.5 py-0.5 bg-ink-800 rounded">
-        NEXT_PUBLIC_PRIVY_APP_ID
-      </code>
-      in <code>.env.local</code> to enable real login + on-chain signing.
-    </div>
-  );
-}

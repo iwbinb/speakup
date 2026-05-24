@@ -5,11 +5,16 @@ import Link from 'next/link';
 import { useHoldings } from '../hooks/useHoldings';
 import { useMeetings } from '../hooks/useMeetings';
 import { useAuth } from '../lib/auth';
+import { useActiveChain } from '../lib/chain-context';
 
 export function HoldingsList() {
   const { address, mode } = useAuth();
   const { holdings, isLoading, error } = useHoldings(address);
   const allMeetings = useMeetings();
+  const chain = useActiveChain();
+  const activeChainName =
+    chain.chains.find((c) => c.id === chain.activeChainId)?.name ??
+    `Chain ${chain.activeChainId}`;
 
   if (error) {
     return (
@@ -41,7 +46,7 @@ export function HoldingsList() {
       <div className="flex items-baseline justify-between">
         <h2 className="text-2xl font-bold">{heading}</h2>
         <p className="text-sm text-ink-500">
-          Robinhood Chain testnet · {withMeetings.length} ticker
+          {activeChainName} · {withMeetings.length} ticker
           {withMeetings.length === 1 ? '' : 's'} tracked
         </p>
       </div>
@@ -51,7 +56,7 @@ export function HoldingsList() {
           <p className="font-medium">No stock tokens detected for this address.</p>
           <p className="text-sm text-ink-700 mt-1">
             {mode === 'watch'
-              ? 'The address you are watching holds 0 of TSLA, AMZN, NFLX on Robinhood Chain testnet. Switch to a different address or have its owner claim from the faucet.'
+              ? `The address you are watching holds 0 of TSLA, AMZN, NFLX on ${activeChainName}. Switch to a different address or have its owner claim from the faucet.`
               : 'Claim Stock Tokens at '}
             {mode === 'wallet' && (
               <a

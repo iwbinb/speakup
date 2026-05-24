@@ -53,10 +53,17 @@ export function useHoldings(account: Address | undefined) {
 
   // Demo identity: synthetic balances so judges see proposals without
   // claiming faucet tokens. Watch + wallet modes always hit the RPC.
+  // We show the same demo data on every supported chain so switching
+  // networks does not blank the page; the displayed token address falls
+  // back to the canonical Robinhood Chain entry when the active chain
+  // has no deploy yet (e.g., Arbitrum Sepolia pre-broadcast).
   if (isDemoIdentity && account) {
+    const ZERO = '0x0000000000000000000000000000000000000000' as Address;
     for (const t of TICKERS) {
-      const addr = t.addresses[activeChainId];
-      if (!addr) continue;
+      const addr =
+        t.addresses[activeChainId] ??
+        (Object.values(t.addresses)[0] as Address | undefined) ??
+        ZERO;
       const amount = DEMO_BALANCES[t.symbol] ?? '0';
       const balance = parseUnits(amount, 18);
       holdings.push({
