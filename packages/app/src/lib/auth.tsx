@@ -45,6 +45,10 @@ export type AuthState = {
   setWatchAddress: (addr: string) => void;
   watchAddress: `0x${string}` | undefined;
   connectWallet: () => Promise<void>;
+  /** Connect with a specific wagmi connector id (used by ConnectWalletModal). */
+  connectWalletById: (connectorId: string) => Promise<void>;
+  /** Last connection error from wagmi, surfaced to the modal. */
+  connectError: string | null;
   // Legacy Privy interface
   login: () => void;
   logout: () => void;
@@ -107,21 +111,37 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
     [persistMode],
   );
 
-  const connectWallet = useCallback(async () => {
-    const injected = connectors.find((c) => c.id === 'injected') ?? connectors[0];
-    if (!injected) {
-      alert(
-        'No EIP-1193 wallet detected. Install MetaMask, Rabby, or similar, then retry.',
-      );
-      return;
-    }
-    try {
-      await connectAsync({ connector: injected, chainId: activeChainId });
-      persistMode('wallet');
-    } catch (e) {
-      console.error('connect failed', e);
-    }
-  }, [connectAsync, connectors, persistMode]);
+  const [connectError, setConnectError] = useState<string | null>(null);
+
+  const connectWalletById = useCallback(
+    async (connectorId: string) => {
+      const target =
+        connectors.find((c) => c.id === connectorId) ??
+        connectors.find((c) => c.id === 'injected') ??
+        connectors[0];
+      if (!target) {
+        setConnectError(
+          'No EIP-1193 wallet detected. Install MetaMask, Rabby, or similar, then retry.',
+        );
+        return;
+      }
+      setConnectError(null);
+      try {
+        await connectAsync({ connector: target, chainId: activeChainId });
+        persistMode('wallet');
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.error('connect failed', e);
+        setConnectError(msg);
+      }
+    },
+    [connectAsync, connectors, persistMode, activeChainId],
+  );
+
+  const connectWallet = useCallback(
+    () => connectWalletById('injected'),
+    [connectWalletById],
+  );
 
   /**
    * Prompt the wallet to switch to the active app chain when the user is in
@@ -173,6 +193,8 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
     setWatchAddress,
     watchAddress,
     connectWallet,
+    connectWalletById,
+    connectError,
     login: connectWallet,
     logout: disconnect,
   };
@@ -194,6 +216,8 @@ export function RealAuthProvider({ children }: { children: ReactNode }) {
     setWatchAddress: () => {},
     watchAddress: undefined,
     connectWallet: async () => login(),
+    connectWalletById: async () => login(),
+    connectError: null,
     login,
     logout,
   };

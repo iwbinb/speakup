@@ -5,12 +5,14 @@ import { useState } from 'react';
 import { useAuth, type AuthMode } from '../lib/auth';
 import { useActiveChain } from '../lib/chain-context';
 import type { SupportedChainId } from '../lib/chains';
+import { ConnectWalletModal } from './ConnectWalletModal';
 
 export function Header() {
   const auth = useAuth();
   const chain = useActiveChain();
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [showChainMenu, setShowChainMenu] = useState(false);
+  const [showConnectModal, setShowConnectModal] = useState(false);
 
   const activeChain = chain.chains.find((c) => c.id === chain.activeChainId);
 
@@ -87,7 +89,19 @@ export function Header() {
         </div>
       </div>
 
-      {showSwitcher && <IdentitySwitcher onClose={() => setShowSwitcher(false)} />}
+      {showSwitcher && (
+        <IdentitySwitcher
+          onClose={() => setShowSwitcher(false)}
+          onOpenConnectModal={() => {
+            setShowSwitcher(false);
+            setShowConnectModal(true);
+          }}
+        />
+      )}
+
+      {showConnectModal && (
+        <ConnectWalletModal onClose={() => setShowConnectModal(false)} />
+      )}
     </header>
   );
 }
@@ -146,7 +160,13 @@ function ModePill({ mode }: { mode: AuthMode }) {
   );
 }
 
-function IdentitySwitcher({ onClose }: { onClose: () => void }) {
+function IdentitySwitcher({
+  onClose,
+  onOpenConnectModal,
+}: {
+  onClose: () => void;
+  onOpenConnectModal: () => void;
+}) {
   const auth = useAuth();
   const [watchInput, setWatchInput] = useState<string>(auth.watchAddress ?? '');
 
@@ -229,21 +249,21 @@ function IdentitySwitcher({ onClose }: { onClose: () => void }) {
             title={
               auth.mode === 'wallet' && auth.address
                 ? `Connected: ${shortAddr(auth.address)}`
-                : 'Connect browser wallet'
+                : 'Connect a wallet'
             }
             subtitle={
               auth.mode === 'wallet'
-                ? 'MetaMask / Rabby / injected. Can sign on-chain votes.'
-                : 'MetaMask, Rabby, or any EIP-1193 wallet. Required to cast real votes.'
+                ? 'Connected to a signing wallet. Can cast real on-chain votes.'
+                : 'MetaMask, Rabby, WalletConnect, email, Google. Required to cast real votes.'
             }
             badge="SIGNS"
-            onClick={async () => {
+            onClick={() => {
               if (auth.mode === 'wallet') {
                 auth.logout();
+                onClose();
               } else {
-                await auth.connectWallet();
+                onOpenConnectModal();
               }
-              onClose();
             }}
             actionLabel={auth.mode === 'wallet' ? 'Disconnect' : undefined}
           />
