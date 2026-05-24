@@ -290,4 +290,61 @@ contract RegistryTest is Test {
         // were ever added by accident, calling it would compile and break this.
         assertEq(registry.owner(), address(this));
     }
+
+    // ---------- Boundary fuzz ----------
+
+    /// @notice Voting at exactly voteOpen or voteDeadline must succeed (inclusive
+    ///         window). Off-by-one bugs in window comparison would surface here.
+    function testFuzz_WindowBoundariesAreInclusive(uint8 dayOffset) public {
+        vm.assume(dayOffset > 0 && dayOffset < 30);
+        address dave = address(0xDA1E);
+        tslaToken.mint(dave, 1 ether);
+
+        // Warp to exactly voteOpen
+        vm.warp(block.timestamp);
+        vm.prank(dave);
+        bytes32 uid1 = registry.castVote(TSLA_MEETING_1, 100, SpeakUpRegistry.Choice.FOR, bytes32(0));
+        assertTrue(uid1 != bytes32(0));
+
+        // Warp to exactly voteDeadline minus a small delta (must still succeed)
+        vm.warp(block.timestamp + uint256(dayOffset) * 1 days);
+        address eve = address(0xE0E);
+        tslaToken.mint(eve, 1 ether);
+        vm.prank(eve);
+        bytes32 uid2 = registry.castVote(TSLA_MEETING_1, 200, SpeakUpRegistry.Choice.AGAINST, bytes32(0));
+        assertTrue(uid2 != bytes32(0));
+    }
+
+    /// @notice Two distinct voters voting on the same (meeting, item) must
+    ///         produce distinct uids and both be retrievable.
+    function testFuzz_DistinctVotersDistinctUids(address voter1, address voter2) public {
+        vm.assume(voter1 != voter2);
+        vm.assume(voter1 != address(0) && voter2 != address(0));
+        // Skip if either address is a precompile or has existing code.
+        vm.assume(voter1.code.length == 0 && voter2.code.length == 0);
+
+        tslaToken.mint(voter1, 1 ether);
+        tslaToken.mint(voter2, 1 ether);
+
+        vm.prank(voter1);
+        bytes32 uid1 = registry.castVote(TSLA_MEETING_1, 5, SpeakUpRegistry.Choice.FOR, bytes32(0));
+        vm.prank(voter2);
+        bytes32 uid2 = registry.castVote(TSLA_MEETING_1, 5, SpeakUpRegistry.Choice.AGAINST, bytes32(0));
+
+        assertTrue(uid1 != uid2);
+        assertTrue(registry.hasVoted(voter1, TSLA_MEETING_1, 5));
+        assertTrue(registry.hasVoted(voter2, TSLA_MEETING_1, 5));
+    }
+
+    /// @notice Acknowledgement with status REJECTED is accepted (not just
+    ///         ACKNOWLEDGED). Production may need to mark unresolvable votes.
+    function test_RelayerCanRejectAttestation() public {
+        vm.prank(alice);
+        bytes32 uid = registry.castVote(TSLA_MEETING_1, 4, SpeakUpRegistry.Choice.ABSTAIN, bytes32(0));
+        vm.prank(relayer);
+        registry.acknowledge(uid, SpeakUpRegistry.AckStatus.REJECTED, "REJECTED-OUTSIDE-WINDOW");
+        (,,,,,,, SpeakUpRegistry.AckStatus status, string memory ackRef) = registry.attestations(uid);
+        assertEq(uint8(status), uint8(SpeakUpRegistry.AckStatus.REJECTED));
+        assertEq(ackRef, "REJECTED-OUTSIDE-WINDOW");
+    }
 }

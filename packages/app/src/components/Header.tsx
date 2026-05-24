@@ -183,11 +183,21 @@ function IdentitySwitcher({
         setResolveError(`No address record for ${raw}`);
         return;
       }
-      auth.setWatchAddress(addr);
+      const ok = auth.setWatchAddress(addr);
+      if (!ok) {
+        setResolveError(`Resolved address ${addr} failed validation.`);
+        return;
+      }
       onClose();
       return;
     }
-    auth.setWatchAddress(raw);
+    const ok = auth.setWatchAddress(raw);
+    if (!ok) {
+      setResolveError(
+        'Not a valid 0x address or ENS name. Example: 0x14d0… or vitalik.eth',
+      );
+      return;
+    }
     onClose();
   }
 
@@ -297,7 +307,7 @@ function IdentitySwitcher({
                 onOpenConnectModal();
               }
             }}
-            actionLabel={auth.mode === 'wallet' ? 'Disconnect' : undefined}
+            {...(auth.mode === 'wallet' ? { actionLabel: 'Disconnect' } : {})}
           />
         </div>
       </div>

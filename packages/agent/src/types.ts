@@ -10,6 +10,7 @@ export const ProposalCategoryEnum = z.enum([
   'shareholder_proposal_other',
   'merger_acquisition',
   'capital_structure',
+  'corporate_structure',
   'other',
 ]);
 export type ProposalCategory = z.infer<typeof ProposalCategoryEnum>;

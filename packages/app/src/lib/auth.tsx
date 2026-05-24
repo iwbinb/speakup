@@ -42,7 +42,8 @@ export type AuthState = {
   isDemoMode: boolean;
   // Mode controls
   setDemoMode: () => void;
-  setWatchAddress: (addr: string) => void;
+  /** Returns true on success (valid 0x address); false otherwise. */
+  setWatchAddress: (addr: string) => boolean;
   watchAddress: `0x${string}` | undefined;
   connectWallet: () => Promise<void>;
   /** Connect with a specific wagmi connector id (used by ConnectWalletModal). */
@@ -93,11 +94,13 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
   }, [persistMode]);
 
   const setWatchAddress = useCallback(
-    (raw: string) => {
+    (raw: string): boolean => {
+      // Returns true on success. Callers (Header IdentitySwitcher) are
+      // responsible for surfacing the failure via toast / inline error
+      // so we never use a blocking alert() here.
       const trimmed = raw.trim();
       if (!isAddress(trimmed)) {
-        alert('Not a valid 0x address.');
-        return;
+        return false;
       }
       const addr = trimmed as `0x${string}`;
       setWatchRaw(addr);
@@ -107,6 +110,7 @@ export function DemoAuthProvider({ children }: { children: ReactNode }) {
         // ignore
       }
       persistMode('watch');
+      return true;
     },
     [persistMode],
   );
@@ -213,7 +217,7 @@ export function RealAuthProvider({ children }: { children: ReactNode }) {
     mode: 'wallet',
     isDemoMode: false,
     setDemoMode: () => {},
-    setWatchAddress: () => {},
+    setWatchAddress: () => false,
     watchAddress: undefined,
     connectWallet: async () => login(),
     connectWalletById: async () => login(),
