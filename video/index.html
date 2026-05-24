@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=1920, height=1080" />
     <title>SpeakUp · 3-minute Buildathon demo</title>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://rsms.me/inter/inter.css"
-    />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
+        width: 1920px; height: 1080px; overflow: hidden;
         background: #ffffff;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         color: #0a0f1c;
       }
-      /* Brand tokens (DESIGN.md) */
       :root {
         --brand: #00c853;
         --brand-dark: #00701a;
@@ -30,14 +24,11 @@
         --ink-100: #eef1f8;
         --ink-50: #f6f8fa;
       }
-
       .scene { position: absolute; inset: 0; width: 100%; height: 100%; }
       .scene-content {
         position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center;
         width: 100%; height: 100%;
         padding: 100px 120px;
         gap: 36px;
@@ -47,8 +38,6 @@
           radial-gradient(ellipse at bottom right, rgba(59,153,252,0.05), transparent 60%),
           #ffffff;
       }
-
-      /* Beat 1 · Hook */
       .hook-tesla {
         width: 280px; height: 280px;
         border-radius: 60px;
@@ -72,8 +61,6 @@
         font-size: 28px; font-weight: 600; letter-spacing: 0.18em;
         text-transform: uppercase; color: var(--ink-500);
       }
-
-      /* Beat 2 · Stakes */
       .counter {
         font-size: 240px; font-weight: 900; line-height: 1;
         color: var(--ink-900); letter-spacing: -0.04em;
@@ -93,8 +80,6 @@
       .stakes-resolve {
         font-size: 64px; font-weight: 700; color: var(--brand-dark);
       }
-
-      /* Beats with screenshot bg */
       .shot {
         position: absolute; inset: 0;
         background-size: cover; background-position: center;
@@ -108,7 +93,6 @@
       .shot-6 { background-image: url('./assets/06-musk-comp-vote.png'); }
       .shot-7 { background-image: url('./assets/07-about.png'); }
       .shot-8 { background-image: url('./assets/08-api-health.png'); }
-
       .vignette::after {
         content: ''; position: absolute; inset: 0;
         background: radial-gradient(ellipse at center, transparent 60%, rgba(10,15,28,0.18) 100%);
@@ -134,8 +118,6 @@
       .label-overlay .body {
         font-size: 22px; color: var(--ink-500); margin-top: 8px; line-height: 1.4;
       }
-
-      /* Beat 5 — peak. Giant ghost number */
       .ghost-amount {
         position: absolute; inset: 0;
         display: flex; align-items: center; justify-content: center;
@@ -145,8 +127,6 @@
         pointer-events: none;
         white-space: nowrap;
       }
-
-      /* Beat 6 · explorer-style card */
       .explorer {
         position: relative; z-index: 2;
         width: 1300px; padding: 60px;
@@ -181,15 +161,8 @@
         border-radius: 12px;
         border: 1px solid rgba(255,255,255,0.06);
       }
-      .explorer .tx-list .check {
-        color: var(--brand); font-weight: 700;
-      }
-
-      /* Beat 7 · three cards */
-      .three-cards {
-        display: flex; gap: 36px;
-        width: 100%; max-width: 1640px;
-      }
+      .explorer .tx-list .check { color: var(--brand); font-weight: 700; }
+      .three-cards { display: flex; gap: 36px; width: 100%; max-width: 1640px; }
       .three-cards .card {
         flex: 1; padding: 56px 44px;
         background: white;
@@ -214,8 +187,6 @@
         margin-top: 16px;
         font-size: 20px; color: var(--ink-500); line-height: 1.5;
       }
-
-      /* Beat 8 · close */
       .logo-mark {
         width: 200px; height: 200px;
         border-radius: 48px;
@@ -239,8 +210,6 @@
       .links .row { display: flex; gap: 12px; }
       .links .lbl { color: var(--ink-500); font-weight: 600; min-width: 70px; text-align: right; }
       .links .val { font-family: 'SF Mono', monospace; }
-
-      /* Common subtle elements */
       .corner-logo {
         position: absolute; top: 60px; left: 60px;
         display: flex; align-items: center; gap: 14px;
@@ -258,29 +227,28 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="149"
+      data-duration="178"
       data-width="1920"
       data-height="1080"
     >
-      <!-- Narration audio -->
       <audio
         id="narration"
         class="clip"
         data-start="0"
-        data-duration="149"
+        data-duration="177"
         data-track-index="0"
         src="./narration.wav"
       ></audio>
 
-      <!-- ===== BEAT 1 · HOOK (0.0 – 15.8s) ===== -->
-      <div id="b1" class="clip scene" data-start="0" data-duration="15.8" data-track-index="1">
+      <!-- BEAT 1 · HOOK (0 – 19.84s) -->
+      <div id="b1" class="clip scene" data-start="0" data-duration="19.84" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp</span></div>
           <div id="b1-tesla" class="hook-tesla">
             <svg viewBox="0 0 48 48" fill="none">
               <path d="M 11 9 Q 24 6 37 9" stroke="white" stroke-width="2" stroke-linecap="round" />
               <rect x="6" y="12" width="36" height="6" rx="1" fill="white" />
-              <rect x="20" y="18" width="8" height="24" rx="1" fill="white" />
+              <rect x="20" y="12" width="8" height="30" rx="1" fill="white" />
             </svg>
           </div>
           <div id="b1-pages-l" class="hook-pages" style="left: 240px; bottom: 80px;"><svg viewBox="0 0 220 290"><rect width="220" height="290" rx="6" fill="white" stroke="#0a0f1c" stroke-width="2"/><line x1="20" y1="40" x2="180" y2="40" stroke="#4a525a" stroke-width="1.5"/><line x1="20" y1="60" x2="180" y2="60" stroke="#e5e7eb" stroke-width="1"/><line x1="20" y1="76" x2="180" y2="76" stroke="#e5e7eb" stroke-width="1"/><line x1="20" y1="92" x2="160" y2="92" stroke="#e5e7eb" stroke-width="1"/><line x1="20" y1="108" x2="180" y2="108" stroke="#e5e7eb" stroke-width="1"/><line x1="20" y1="124" x2="170" y2="124" stroke="#e5e7eb" stroke-width="1"/><text x="20" y="270" font-family="monospace" font-size="11" fill="#9ca3af">DEF 14A · §14a-9</text></svg></div>
@@ -292,8 +260,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 2 · STAKES (15.8 – 28.9s) ===== -->
-      <div id="b2" class="clip scene" data-start="15.8" data-duration="13.1" data-track-index="1">
+      <!-- BEAT 2 · STAKES (19.84 – 35.12s) -->
+      <div id="b2" class="clip scene" data-start="19.84" data-duration="15.28" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp</span></div>
           <div id="b2-counter" class="counter">0</div>
@@ -305,8 +273,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 3 · LIVE PRODUCT (28.9 – 43.7s) ===== -->
-      <div id="b3" class="clip scene vignette" data-start="28.9" data-duration="14.8" data-track-index="1">
+      <!-- BEAT 3 · LIVE PRODUCT (35.12 – 52.56s) -->
+      <div id="b3" class="clip scene vignette" data-start="35.12" data-duration="17.44" data-track-index="1">
         <div id="b3-shot1" class="shot shot-1"></div>
         <div id="b3-shot2" class="shot shot-2" style="opacity:0;"></div>
         <div class="label-overlay" id="b3-label" style="opacity:0;">
@@ -316,8 +284,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 4 · PROPOSAL WALK (43.7 – 71.4s) ===== -->
-      <div id="b4" class="clip scene vignette" data-start="43.7" data-duration="27.7" data-track-index="1">
+      <!-- BEAT 4 · PROPOSAL WALK (52.56 – 85.73s) -->
+      <div id="b4" class="clip scene vignette" data-start="52.56" data-duration="33.17" data-track-index="1">
         <div id="b4-shot" class="shot shot-5"></div>
         <div class="label-overlay" id="b4-label" style="opacity:0;">
           <div class="kicker">Tesla 2025 · Item 1 · Director election</div>
@@ -326,8 +294,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 5 · MUSK RE-VOTE (peak) (71.4 – 91.3s) ===== -->
-      <div id="b5" class="clip scene vignette" data-start="71.4" data-duration="19.8" data-track-index="1">
+      <!-- BEAT 5 · MUSK PEAK (85.73 – 109.64s) -->
+      <div id="b5" class="clip scene vignette" data-start="85.73" data-duration="23.91" data-track-index="1">
         <div id="b5-shot" class="shot shot-6"></div>
         <div id="b5-ghost" class="ghost-amount" style="opacity:0;">$56,000,000,000</div>
         <div class="label-overlay" id="b5-label" style="opacity:0; bottom: 100px;">
@@ -337,8 +305,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 6 · ON-CHAIN PROOF (91.3 – 109.7s) ===== -->
-      <div id="b6" class="clip scene" data-start="91.3" data-duration="18.4" data-track-index="1">
+      <!-- BEAT 6 · ON-CHAIN PROOF (109.64 – 131.80s) -->
+      <div id="b6" class="clip scene" data-start="109.64" data-duration="22.16" data-track-index="1">
         <div class="scene-content" style="background: linear-gradient(180deg, #f6f8fa 0%, #eef1f8 100%);">
           <div class="explorer">
             <span class="verified">● SpeakUpRegistry · Blockscout VERIFIED</span>
@@ -357,8 +325,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 7 · WHY WE WIN (109.7 – 132.4s) ===== -->
-      <div id="b7" class="clip scene" data-start="109.7" data-duration="22.7" data-track-index="1">
+      <!-- BEAT 7 · WHY WE WIN (131.80 – 159.68s) -->
+      <div id="b7" class="clip scene" data-start="131.80" data-duration="27.88" data-track-index="1">
         <div class="scene-content">
           <div class="corner-logo"><div class="mark"></div><span>SpeakUp · why we win</span></div>
           <div class="three-cards">
@@ -381,8 +349,8 @@
         </div>
       </div>
 
-      <!-- ===== BEAT 8 · CLOSE (132.4 – 147.3s) ===== -->
-      <div id="b8" class="clip scene" data-start="132.4" data-duration="16" data-track-index="1">
+      <!-- BEAT 8 · CLOSE (159.68 – 177s) -->
+      <div id="b8" class="clip scene" data-start="159.68" data-duration="17.32" data-track-index="1">
         <div class="scene-content">
           <div id="b8-logo" class="logo-mark" style="opacity:0;">
             <svg viewBox="0 0 48 48" fill="white">
@@ -411,69 +379,69 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
 
-      /* ===== Beat 1 · Hook (0–15.8s) ===== */
-      tl.from('#b1-tesla', { scale: 0.6, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, 0);
-      tl.to('#b1-tesla', { rotation: 6, scale: 1.04, duration: 8, ease: 'sine.inOut' }, 0.5);
-      tl.to('#b1-pages-l', { opacity: 0.92, y: -40, rotation: -6, duration: 1.2, ease: 'power2.out' }, 2.2);
-      tl.to('#b1-pages-r', { opacity: 0.92, y: -30, rotation: 4, duration: 1.2, ease: 'power2.out' }, 2.8);
-      tl.to('#b1-tesla', { opacity: 0.2, scale: 0.7, duration: 0.6, ease: 'power2.in' }, 11.0);
-      tl.to('#b1-pages-l, #b1-pages-r', { opacity: 0.3, duration: 0.6 }, 11.0);
-      tl.fromTo('#b1-stat', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 11.4);
+      // Beat anchors (from whisper transcript of Flo @ rate 200)
+      const B1=0, B2=19.84, B3=35.12, B4=52.56, B5=85.73, B6=109.64, B7=131.80, B8=159.68;
 
-      /* ===== Beat 2 · Stakes (15.8–28.9s) ===== */
+      /* Beat 1 · Hook (0–19.84s) */
+      tl.from('#b1-tesla', { scale: 0.6, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, B1, 'auto');
+      tl.to('#b1-tesla', { rotation: 6, scale: 1.04, duration: 10, ease: 'sine.inOut', overwrite: 'auto' }, B1 + 1);
+      tl.to('#b1-pages-l', { opacity: 0.92, y: -40, rotation: -6, duration: 1.3, ease: 'power2.out' }, B1 + 3.0);
+      tl.to('#b1-pages-r', { opacity: 0.92, y: -30, rotation: 4, duration: 1.3, ease: 'power2.out' }, B1 + 3.7);
+      tl.to('#b1-tesla', { opacity: 0.2, scale: 0.7, duration: 0.7, ease: 'power2.in', overwrite: 'auto' }, B1 + 13.5);
+      tl.to('#b1-pages-l, #b1-pages-r', { opacity: 0.3, duration: 0.7 }, B1 + 13.5);
+      tl.fromTo('#b1-stat', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, B1 + 14.0);
+
+      /* Beat 2 · Stakes */
       const counter = { val: 0 };
       const counterEl = document.getElementById('b2-counter');
       tl.to(counter, {
-        val: 50_000_000, duration: 2.6, ease: 'power2.out',
-        onUpdate: () => {
-          counterEl.textContent = Math.floor(counter.val).toLocaleString('en-US');
-        }
-      }, 15.8 + 0.4);
-      tl.fromTo('#b2-mult', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.7, ease: 'back.out(1.6)' }, 15.8 + 5.0);
-      tl.fromTo('#b2-resolve', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 15.8 + 9.0);
+        val: 50_000_000, duration: 3.0, ease: 'power2.out',
+        onUpdate: () => { counterEl.textContent = Math.floor(counter.val).toLocaleString('en-US'); }
+      }, B2 + 0.5);
+      tl.fromTo('#b2-mult', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.7, ease: 'back.out(1.6)' }, B2 + 6.5);
+      tl.fromTo('#b2-resolve', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, B2 + 11.0);
 
-      /* ===== Beat 3 · Live product (28.9–43.7s) ===== */
-      tl.fromTo('#b3-shot1', { scale: 1.06 }, { scale: 1.0, duration: 14.8, ease: 'sine.out' }, 28.9);
-      tl.to('#b3-shot2', { opacity: 1, duration: 0.6, ease: 'power1.inOut' }, 28.9 + 4.5);
-      tl.to('#b3-shot2', { opacity: 0, duration: 0.6 }, 28.9 + 10.0);
-      tl.fromTo('#b3-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 28.9 + 2.5);
+      /* Beat 3 · Live product */
+      tl.fromTo('#b3-shot1', { scale: 1.06 }, { scale: 1.0, duration: 17.0, ease: 'sine.out' }, B3);
+      tl.to('#b3-shot2', { opacity: 1, duration: 0.6, ease: 'power1.inOut' }, B3 + 5.5);
+      tl.to('#b3-shot2', { opacity: 0, duration: 0.6 }, B3 + 12.0);
+      tl.fromTo('#b3-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, B3 + 2.5);
 
-      /* ===== Beat 4 · Proposal walk (43.7–71.4s) ===== */
-      tl.fromTo('#b4-shot', { scale: 1.08 }, { scale: 1.0, duration: 27.7, ease: 'sine.out' }, 43.7);
-      tl.fromTo('#b4-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 43.7 + 3.0);
+      /* Beat 4 · Proposal walk */
+      tl.fromTo('#b4-shot', { scale: 1.08 }, { scale: 1.0, duration: 33.0, ease: 'sine.out' }, B4);
+      tl.fromTo('#b4-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, B4 + 3.5);
 
-      /* ===== Beat 5 · Musk peak (71.4–91.3s) ===== */
-      tl.fromTo('#b5-shot', { scale: 1.0 }, { scale: 1.08, duration: 19.8, ease: 'sine.inOut' }, 71.4);
-      tl.to('#b5-ghost', { opacity: 0.12, duration: 1.2, ease: 'power2.out' }, 71.4 + 2.0);
-      tl.fromTo('#b5-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 71.4 + 3.5);
+      /* Beat 5 · Musk peak */
+      tl.fromTo('#b5-shot', { scale: 1.0 }, { scale: 1.08, duration: 23.5, ease: 'sine.inOut' }, B5);
+      tl.to('#b5-ghost', { opacity: 0.12, duration: 1.3, ease: 'power2.out' }, B5 + 2.5);
+      tl.fromTo('#b5-label', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, B5 + 4.0);
 
-      /* ===== Beat 6 · On-chain proof (91.3–109.7s) ===== */
+      /* Beat 6 · On-chain proof */
       const addrEl = document.getElementById('b6-addr');
       const address = '0xb6D8E46BF9e48aDD4747595b2e437Eb327071c94';
       tl.to({}, {
-        duration: 1.6, ease: 'none',
+        duration: 2.0, ease: 'none',
         onStart: () => { addrEl.textContent = ''; },
         onUpdate: function() {
           const p = this.progress();
           addrEl.textContent = address.slice(0, Math.floor(address.length * p));
         }
-      }, 91.3 + 0.4);
-      // Stagger reveal the 8 tx rows
+      }, B6 + 0.5);
       tl.from('#b6-txs .row', {
-        opacity: 0, x: -40, stagger: 0.5, duration: 0.45, ease: 'power2.out'
-      }, 91.3 + 2.2);
+        opacity: 0, x: -40, stagger: 0.6, duration: 0.5, ease: 'power2.out'
+      }, B6 + 3.0);
 
-      /* ===== Beat 7 · Why we win (109.7–132.4s) ===== */
-      tl.fromTo('#b7-c1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 109.7 + 0.3);
-      tl.fromTo('#b7-c2', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 109.7 + 7.5);
-      tl.fromTo('#b7-c3', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 109.7 + 14.5);
+      /* Beat 7 · Why we win */
+      tl.fromTo('#b7-c1', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, B7 + 0.4);
+      tl.fromTo('#b7-c2', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, B7 + 9.0);
+      tl.fromTo('#b7-c3', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, B7 + 18.0);
 
-      /* ===== Beat 8 · Close (132.4–148s) ===== */
-      tl.fromTo('#b8-logo', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 132.4 + 0.3);
-      tl.fromTo('#b8-word', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 132.4 + 1.2);
-      tl.fromTo('#b8-tag', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 132.4 + 2.0);
-      tl.fromTo('#b8-links', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 132.4 + 3.5);
-      tl.fromTo('#b8-footer', { opacity: 0 }, { opacity: 0.6, duration: 0.6 }, 132.4 + 5.0);
+      /* Beat 8 · Close */
+      tl.fromTo('#b8-logo', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, B8 + 0.3);
+      tl.fromTo('#b8-word', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, B8 + 1.2);
+      tl.fromTo('#b8-tag', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, B8 + 2.0);
+      tl.fromTo('#b8-links', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, B8 + 4.5);
+      tl.fromTo('#b8-footer', { opacity: 0 }, { opacity: 0.6, duration: 0.6 }, B8 + 7.5);
 
       window.__timelines['main'] = tl;
     </script>

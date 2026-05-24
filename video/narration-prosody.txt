@@ -1,0 +1,45 @@
+You own a hundred shares of Tesla. [[slnc 350]]
+Every year you get to vote on who runs the company, [[slnc 200]] on the C E O's pay, [[slnc 200]] on whether to move to Texas. [[slnc 400]]
+And every year, [[slnc 200]] seventy percent of retail shareholders skip the vote. [[slnc 300]]
+Because the proxy statement is a hundred pages of legalese. [[slnc 600]]
+
+Robinhood Chain is about to bring fifty million retail investors on-chain through tokenized stocks. [[slnc 400]]
+If we do nothing, [[slnc 200]] that participation gap is amplified one thousand times. [[slnc 400]]
+SpeakUp closes it. [[slnc 250]] Before it forms. [[slnc 600]]
+
+This is the live demo, [[slnc 200]] running on Cloudflare. [[slnc 350]]
+The header chip says DEMO, [[slnc 200]] so you can explore the whole flow without setting up a wallet. [[slnc 400]]
+Three real tickers. [[slnc 250]] Tesla, [[slnc 150]] Amazon, [[slnc 150]] Netflix. [[slnc 300]] Each one a live Stock Token on Robinhood Chain testnet. [[slnc 600]]
+
+Open Tesla. [[slnc 300]]
+Seven proposals up for vote at the twenty twenty-five annual meeting. [[slnc 400]]
+Take item one. [[slnc 250]] The directors up for re-election. [[slnc 300]]
+Management says yes. [[slnc 350]]
+I S S, [[slnc 200]] the largest independent proxy advisor, [[slnc 200]] says no. [[slnc 350]]
+Glass Lewis, [[slnc 200]] the second largest, [[slnc 200]] says no. [[slnc 400]]
+SpeakUp's Advisor agent reads the full filing, [[slnc 200]] weighs your stated preferences against both, [[slnc 250]] and recommends AGAINST. [[slnc 300]]
+High confidence. [[slnc 250]] Three lines. [[slnc 250]] That's the whole decision. [[slnc 600]]
+
+Now item two. [[slnc 350]] The one that matters. [[slnc 400]]
+The fifty-six billion dollar Musk performance package. [[slnc 400]]
+The Delaware court tore it up in twenty twenty-four. [[slnc 250]] Now it's being re-voted. [[slnc 400]]
+Largest C E O compensation package in U S history. [[slnc 500]]
+SpeakUp recommends AGAINST. [[slnc 300]] I S S agrees. [[slnc 250]] Glass Lewis agrees. [[slnc 350]]
+You tap once and move on. [[slnc 600]]
+
+Every vote becomes an on-chain attestation on Robinhood Chain. [[slnc 350]]
+The Registry contract is verified on Blockscout. [[slnc 400]]
+Eight transaction hashes are documented in the repo, [[slnc 250]] proving the full deploy plus vote plus acknowledge cycle. [[slnc 400]]
+One signature records all your decisions. [[slnc 350]]
+A mock relayer bridges to Broadridge in production. [[slnc 600]]
+
+Three things we want judges to take away. [[slnc 400]]
+One. [[slnc 250]] We built directly on Robinhood Chain, [[slnc 200]] with their native Stock Tokens, [[slnc 200]] not a wrapper. [[slnc 500]]
+Two. [[slnc 250]] The product is three specialized Anthropic agents. [[slnc 300]] Reader. [[slnc 200]] Advisor. [[slnc 200]] Executor. [[slnc 250]] The core, [[slnc 150]] not a sidecar. [[slnc 500]]
+Three. [[slnc 250]] Tokenized equity governance is the unwritten chapter in Robinhood Chain's own roadmap. [[slnc 300]] There is no incumbent. [[slnc 600]]
+
+SpeakUp is competing for the Robinhood Overall slot, [[slnc 200]] Best Agentic Project, [[slnc 200]] and a seat at Founder House London. [[slnc 400]]
+Code on GitHub at i w b i n b slash speakup. [[slnc 300]]
+Live at speak up dot vote. [[slnc 500]]
+Give every on-chain shareholder a voice. [[slnc 400]]
+Thank you.
