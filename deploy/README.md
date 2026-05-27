@@ -1,6 +1,6 @@
 # SpeakUp Deploy Recipes
 
-Production deploy targets bare-metal Ubuntu 24.04 with Caddy + systemd, NodeStake's default stack.
+Production deploy targets bare-metal Ubuntu 24.04 with Caddy + systemd.
 
 ## Components
 
@@ -84,7 +84,7 @@ sudo systemctl daemon-reload
 ## Production roadmap
 
 When Robinhood Chain mainnet ships:
-1. Provision a Hetzner AX102 / AX162-R bare-metal host (NodeStake default).
+1. Provision a Hetzner AX102 / AX162-R class bare-metal host.
 2. Move relayer key to AWS KMS, replace `RELAYER_PRIVATE_KEY` with `RELAYER_KMS_KEY_ID`, patch mock-relayer.ts to sign via KMS.
 3. Replace mock acknowledgement with real Broadridge SOAP API call (or Mediant if the issuer uses Mediant).
 4. Add Prometheus exporter on the relayer + Grafana dashboard for VoteCast / VoteAcknowledged rates.

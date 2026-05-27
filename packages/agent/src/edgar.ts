@@ -2,7 +2,7 @@ import { parseHTML } from 'linkedom';
 
 const EDGAR_BASE = 'https://data.sec.gov';
 const userAgent = () =>
-  process.env['EDGAR_USER_AGENT'] ?? 'SpeakUp-Hackathon iwbinb@icloud.com';
+  process.env['EDGAR_USER_AGENT'] ?? 'SpeakUp contact@speakup.example';
 
 export type EdgarFiling = {
   form: string;
